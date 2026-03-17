@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:core/src/presentation/model/crew_ui.dart';
+import 'package:shared/shared.dart';
 
 part 'crew.g.dart';
 
@@ -38,4 +40,12 @@ class Crew extends Equatable {
   factory Crew.fromJson(Map<String, dynamic> json) => _$CrewFromJson(json);
 
   Map<String, dynamic> toJson() => _$CrewToJson(this);
+
+  CrewUI toUI() {
+    return CrewUI(
+      name: realName,
+      character: characterName,
+      profileUrl: profile.isNotEmpty ? profile.imageOriginal : '',
+    );
+  }
 }

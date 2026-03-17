@@ -50,19 +50,20 @@ class _TvPopularScreenState extends State<TvPopularScreen> {
               return ListView.builder(
                 itemCount: state.result.results.length,
                 itemBuilder: (BuildContext context, int index) {
-                  Movies movies = state.result.results[index];
+                  final dto = state.result.results[index];
+                  final movie = dto.toUI(false);
                   return CardMovies(
-                    image: movies.posterPath,
-                    title: movies.tvName,
-                    vote: movies.voteAverage.toString(),
-                    releaseDate: movies.tvRelease,
-                    overview: movies.overview,
-                    genre: movies.genreIds.take(3).map(buildGenreChip).toList(),
+                    image: dto.posterPath,
+                    title: movie.name,
+                    vote: movie.ratingText,
+                    releaseDate: movie.releaseDate,
+                    overview: movie.overview,
+                    genre: movie.genreIds.take(3).map(buildGenreChip).toList(),
                     onTap: () {
                       Navigation.intentWithData(
                         context,
                         DetailScreen.routeName,
-                        ScreenArguments(movies, false, false),
+                        ScreenArguments(movie, false, false),
                       );
                     },
                   );

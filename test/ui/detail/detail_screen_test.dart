@@ -43,7 +43,7 @@ void main() {
   late MockTrailerBloc mockTrailerBloc;
   late MockCrewBloc mockCrewBloc;
 
-  final tMovie = Movies(
+  final _tMovieDto = Movies(
     1,
     'Test Movie Title',
     'This is a test overview for the movie.',
@@ -57,6 +57,7 @@ void main() {
     '',
   );
 
+  final tMovie = _tMovieDto.toUI(true);
   final tArguments = ScreenArguments(tMovie, true, false);
 
   final tCrew = Crew('Sam Rockwell', 'The Hero', '/profile.jpg');

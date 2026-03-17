@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:core/src/presentation/model/trailer_ui.dart';
 
 part 'trailer.g.dart';
 
@@ -39,4 +40,13 @@ class Trailer extends Equatable {
       _$TrailerFromJson(json);
 
   Map<String, dynamic> toJson() => _$TrailerToJson(this);
+
+  TrailerUI toUI() {
+    return TrailerUI(
+      id: trailerId,
+      title: title,
+      youtubeId: youtubeId,
+      youtubeUrl: 'https://www.youtube.com/watch?v=$youtubeId',
+    );
+  }
 }

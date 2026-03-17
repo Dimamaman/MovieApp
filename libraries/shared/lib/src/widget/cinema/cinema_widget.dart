@@ -80,7 +80,7 @@ class _CinemaWidgetState extends State<CinemaWidget>
           child: ClipRRect(
             borderRadius: BorderRadius.circular(Sizes.dp10(context)),
             child: CachedNetworkImage(
-              imageUrl: (widget.movieBackground ?? '').imageOriginal,
+              imageUrl: widget.movieBackground ?? '',
               width: Sizes.width(context),
               fit: BoxFit.fill,
               placeholder: (context, url) => LoadingIndicator(),

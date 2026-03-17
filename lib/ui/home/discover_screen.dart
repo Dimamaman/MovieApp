@@ -42,7 +42,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               itemCount: state.result.results.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                var movie = state.result.results[index];
+                final dto = state.result.results[index];
+                final movie = dto.toUI(true);
                 var position = index + 1;
                 return Container(
                   width: Sizes.width(context),
@@ -51,7 +52,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                     alignment: Alignment.topCenter,
                     children: <Widget>[
                       CachedNetworkImage(
-                        imageUrl: movie.backdropPath.imageOriginal,
+                        imageUrl: movie.backdropUrl,
                         width: Sizes.width(context),
                         height: Sizes.height(context),
                         fit: BoxFit.cover,
@@ -77,9 +78,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                       Align(
                         alignment: Alignment.center,
                         child: CardDiscover(
-                          image: movie.posterPath,
-                          title: movie.title,
-                          rating: movie.voteAverage,
+                          image: dto.posterPath,
+                          title: movie.name,
+                          rating: movie.rating,
                           genre: movie.genreIds,
                           onTap: () {
                             Navigation.intentWithData(

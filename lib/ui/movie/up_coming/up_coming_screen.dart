@@ -51,19 +51,20 @@ class _UpComingScreenState extends State<UpComingScreen> {
               return ListView.builder(
                 itemCount: state.result.results.length,
                 itemBuilder: (BuildContext context, int index) {
-                  Movies movies = state.result.results[index];
+                  final dto = state.result.results[index];
+                  final movie = dto.toUI(true);
                   return CardMovies(
-                    image: movies.posterPath,
-                    title: movies.title,
-                    vote: movies.voteAverage.toString(),
-                    releaseDate: movies.releaseDate,
-                    overview: movies.overview,
-                    genre: movies.genreIds.take(3).map(buildGenreChip).toList(),
+                    image: dto.posterPath,
+                    title: movie.name,
+                    vote: movie.ratingText,
+                    releaseDate: movie.releaseDate,
+                    overview: movie.overview,
+                    genre: movie.genreIds.take(3).map(buildGenreChip).toList(),
                     onTap: () {
                       Navigation.intentWithData(
                         context,
                         DetailScreen.routeName,
-                        ScreenArguments(movies, true, false),
+                        ScreenArguments(movie, true, false),
                       );
                     },
                   );

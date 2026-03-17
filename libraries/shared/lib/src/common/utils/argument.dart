@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 
 class ScreenArguments {
-  final Movies movies;
+  final MoviesUI movies;
   final bool isFromMovie;
   final bool isFromBanner;
 

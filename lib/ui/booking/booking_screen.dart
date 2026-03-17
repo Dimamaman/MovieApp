@@ -19,7 +19,7 @@ class BookingScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        title: Text(args.movies.title ?? args.movies.tvName),
+        title: Text(args.movies.name),
       ),
       body: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
@@ -29,7 +29,7 @@ class BookingScreen extends StatelessWidget {
             children: <Widget>[
               DateWidget(),
               TimeWidget(),
-              CinemaWidget(movieBackground: args.movies.backdropPath),
+              CinemaWidget(movieBackground: args.movies.backdropUrl),
               Padding(
                 padding: EdgeInsets.only(
                   top: Sizes.dp20(context),

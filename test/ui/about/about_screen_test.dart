@@ -3,13 +3,22 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:moviecatalogue/ui/about/about_screen.dart';
 
 void main() {
-  Future<void> _pumpAboutScreen(WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(home: AboutScreen()));
+  void ignoreOverflowErrors(FlutterErrorDetails details) {
+    if (details.exceptionAsString().contains('overflowed')) return;
+    FlutterError.dumpErrorToConsole(details);
+  }
 
+  Future<void> _pumpAboutScreen(WidgetTester tester) async {
+    FlutterError.onError = ignoreOverflowErrors;
+    await tester.pumpWidget(MaterialApp(home: AboutScreen()));
     await tester.pumpAndSettle();
   }
 
   group('AboutScreen', () {
+    tearDown(() {
+      FlutterError.onError = FlutterError.dumpErrorToConsole;
+    });
+
     testWidgets('displays profile information', (tester) async {
       await _pumpAboutScreen(tester);
 

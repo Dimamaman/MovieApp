@@ -41,44 +41,45 @@ class BannerHome extends StatelessWidget {
             ),
             items: <Widget>[
               for (var i = 0; i < result; i++)
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(Sizes.dp10(context)),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigation.intentWithData(
-                        context,
-                        routeNameDetail,
-                        ScreenArguments(data.results[i], true, true),
-                      );
-                    },
-                    child: GridTile(
-                      // TODO: Create Hero Animation with "id" from "result"
-                      child: CachedNetworkImage(
-                        imageUrl: data.results[i].backdropPath.imageOriginal,
-                        width: Sizes.width(context),
-                        fit: BoxFit.fill,
-                        placeholder: (context, url) => LoadingIndicator(),
-                        errorWidget: (context, url, error) => ErrorImage(),
-                      ),
-                      footer: Container(
-                        color: ColorPalettes.whiteSemiTransparent,
-                        padding: EdgeInsets.all(Sizes.dp5(context)),
-                        child: Text(
-                          isFromMovie
-                              ? data.results[i].title
-                              : data.results[i].tvName,
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: ColorPalettes.darkBG,
-                            fontWeight: FontWeight.bold,
-                            fontSize: Sizes.dp16(context),
+                Builder(builder: (context) {
+                  final dto = data.results[i];
+                  final movie = dto.toUI(isFromMovie);
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(Sizes.dp10(context)),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigation.intentWithData(
+                          context,
+                          routeNameDetail,
+                          ScreenArguments(movie, isFromMovie, true),
+                        );
+                      },
+                      child: GridTile(
+                        child: CachedNetworkImage(
+                          imageUrl: dto.backdropPath.imageOriginal,
+                          width: Sizes.width(context),
+                          fit: BoxFit.fill,
+                          placeholder: (context, url) => LoadingIndicator(),
+                          errorWidget: (context, url, error) => ErrorImage(),
+                        ),
+                        footer: Container(
+                          color: ColorPalettes.whiteSemiTransparent,
+                          padding: EdgeInsets.all(Sizes.dp5(context)),
+                          child: Text(
+                            movie.name,
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: ColorPalettes.darkBG,
+                              fontWeight: FontWeight.bold,
+                              fontSize: Sizes.dp16(context),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                }),
             ],
           ),
         ),

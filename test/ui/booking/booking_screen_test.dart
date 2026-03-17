@@ -20,11 +20,11 @@ Yaratilgan testlar:
 */
 
 void main() {
-  late Movies tMovie;
+  late MoviesUI tMovieUI;
   late ScreenArguments tArguments;
 
   setUp(() {
-    tMovie = Movies(
+    final tMovie = Movies(
       1,
       'Test Booking Movie',
       'Overview',
@@ -38,7 +38,8 @@ void main() {
       '',
     );
 
-    tArguments = ScreenArguments(tMovie, true, false);
+    tMovieUI = tMovie.toUI(true);
+    tArguments = ScreenArguments(tMovieUI, true, false);
   });
 
   Future<void> pumpBookingScreen(WidgetTester tester) async {

@@ -55,13 +55,10 @@ class _DetailScreenState extends State<DetailScreen> {
                 CardMoviesHeader(
                   isFromBanner: widget.arguments.isFromBanner,
                   idMovie: widget.arguments.movies.id,
-                  title:
-                      widget.arguments.movies.title ??
-                      widget.arguments.movies.tvName,
-                  imageBanner:
-                      widget.arguments.movies.backdropPath.imageOriginal,
-                  imagePoster: widget.arguments.movies.posterPath.imageOriginal,
-                  rating: widget.arguments.movies.voteAverage,
+                  title: widget.arguments.movies.name,
+                  imageBanner: widget.arguments.movies.backdropUrl,
+                  imagePoster: widget.arguments.movies.posterUrl,
+                  rating: widget.arguments.movies.rating,
                   genre: widget.arguments.movies.genreIds
                       .take(3)
                       .map(buildGenreChip)

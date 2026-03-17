@@ -193,16 +193,17 @@ class _TvShowScreenState extends State<TvShowScreen> {
                       ? 5
                       : state.result.results.length,
                   itemBuilder: (BuildContext context, int index) {
-                    Movies movies = state.result.results[index];
+                    final dto = state.result.results[index];
+                    final movie = dto.toUI(false);
                     return CardHome(
-                      image: movies.posterPath,
-                      title: movies.tvName,
-                      rating: movies.voteAverage,
+                      image: dto.posterPath,
+                      title: movie.name,
+                      rating: movie.rating,
                       onTap: () {
                         Navigation.intentWithData(
                           context,
                           DetailScreen.routeName,
-                          ScreenArguments(movies, false, false),
+                          ScreenArguments(movie, false, false),
                         );
                       },
                     );
@@ -279,16 +280,17 @@ class _TvShowScreenState extends State<TvShowScreen> {
                       ? 5
                       : state.result.results.length,
                   itemBuilder: (BuildContext context, int index) {
-                    Movies movies = state.result.results[index];
+                    final dto = state.result.results[index];
+                    final movie = dto.toUI(false);
                     return CardHome(
-                      image: movies.posterPath,
-                      title: movies.tvName,
-                      rating: movies.voteAverage,
+                      image: dto.posterPath,
+                      title: movie.name,
+                      rating: movie.rating,
                       onTap: () {
                         Navigation.intentWithData(
                           context,
                           DetailScreen.routeName,
-                          ScreenArguments(movies, false, false),
+                          ScreenArguments(movie, false, false),
                         );
                       },
                     );

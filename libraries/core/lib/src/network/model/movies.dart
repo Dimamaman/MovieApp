@@ -1,5 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:core/src/network/model/genres.dart';
+import 'package:core/src/presentation/model/movies_ui.dart';
+import 'package:shared/shared.dart';
 
 part 'movies.g.dart';
 
@@ -84,4 +87,29 @@ class Movies extends Equatable {
   factory Movies.fromJson(Map<String, dynamic> json) => _$MoviesFromJson(json);
 
   Map<String, dynamic> toJson() => _$MoviesToJson(this);
+
+  MoviesUI toUI(bool isMovie) {
+    final name = isMovie ? title : tvName;
+    final date = isMovie ? releaseDate : tvRelease;
+    final year = date.length >= 4 ? date.substring(0, 4) : '-';
+    final genreNames =
+        genreIds.map((id) => Genres.genres[id] ?? '').where((g) => g.isNotEmpty).toList();
+
+    return MoviesUI(
+      id: id,
+      name: name,
+      overview: overview,
+      releaseDate: date,
+      releaseYear: year,
+      genres: genreNames,
+      genreIds: genreIds,
+      genreText: genreNames.take(3).join(', '),
+      rating: voteAverage,
+      ratingText: voteAverage.toStringAsFixed(1),
+      ratingPercent: '${(voteAverage * 10).toInt()}%',
+      posterUrl: posterPath.imageOriginal,
+      backdropUrl: backdropPath.imageOriginal,
+      isMovie: isMovie,
+    );
+  }
 }
