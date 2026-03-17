@@ -23,13 +23,13 @@ class Movies extends Equatable {
   @JsonKey(name: 'id')
   final int id;
 
-  @JsonKey(name: 'title')
+  @JsonKey(name: 'title', defaultValue: '')
   final String title;
 
-  @JsonKey(name: 'overview')
+  @JsonKey(name: 'overview', defaultValue: '')
   final String overview;
 
-  @JsonKey(name: 'release_date')
+  @JsonKey(name: 'release_date', defaultValue: '')
   final String releaseDate;
 
   @JsonKey(name: 'genre_ids')
@@ -41,16 +41,16 @@ class Movies extends Equatable {
   @JsonKey(name: 'popularity')
   final double popularity;
 
-  @JsonKey(name: 'poster_path')
+  @JsonKey(name: 'poster_path', defaultValue: '')
   final String posterPath;
 
-  @JsonKey(name: 'backdrop_path')
+  @JsonKey(name: 'backdrop_path', defaultValue: '')
   final String backdropPath;
 
-  @JsonKey(name: 'original_name')
+  @JsonKey(name: 'original_name', defaultValue: '')
   final String tvName;
 
-  @JsonKey(name: 'first_air_date')
+  @JsonKey(name: 'first_air_date', defaultValue: '')
   final String tvRelease;
 
   Movies(
