@@ -21,13 +21,13 @@ class ResultCrew extends Equatable {
 
 @JsonSerializable()
 class Crew extends Equatable {
-  @JsonKey(name: 'name')
+  @JsonKey(name: 'name', defaultValue: '')
   final String realName;
 
-  @JsonKey(name: 'character')
+  @JsonKey(name: 'character', defaultValue: '')
   final String characterName;
 
-  @JsonKey(name: 'profile_path')
+  @JsonKey(name: 'profile_path', defaultValue: '')
   final String profile;
 
   Crew(this.realName, this.characterName, this.profile);
