@@ -30,9 +30,15 @@ class _DetailScreenState extends State<DetailScreen> {
   void initState() {
     super.initState();
     _loadTrailer(
-        context, widget.arguments.movies.id, widget.arguments.isFromMovie);
+      context,
+      widget.arguments.movies.id,
+      widget.arguments.isFromMovie,
+    );
     _loadCrew(
-        context, widget.arguments.movies.id, widget.arguments.isFromMovie);
+      context,
+      widget.arguments.movies.id,
+      widget.arguments.isFromMovie,
+    );
   }
 
   @override
@@ -49,7 +55,8 @@ class _DetailScreenState extends State<DetailScreen> {
                 CardMoviesHeader(
                   isFromBanner: widget.arguments.isFromBanner,
                   idMovie: widget.arguments.movies.id,
-                  title: widget.arguments.movies.title ??
+                  title:
+                      widget.arguments.movies.title ??
                       widget.arguments.movies.tvName,
                   imageBanner:
                       widget.arguments.movies.backdropPath.imageOriginal,
@@ -73,9 +80,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         ),
                       ),
                       SizedBox(height: Sizes.dp8(context)),
-                      Text(
-                        widget.arguments.movies.overview,
-                      ),
+                      Text(widget.arguments.movies.overview),
                     ],
                   ),
                 ),
@@ -102,10 +107,10 @@ class _DetailScreenState extends State<DetailScreen> {
                     text: "Booking Ticket",
                     onPressed: () {
                       Navigation.intentWithData(
-                          context,
-                          BookingScreen.routeName,
-                          ScreenArguments(
-                              widget.arguments.movies, true, false));
+                        context,
+                        BookingScreen.routeName,
+                        ScreenArguments(widget.arguments.movies, true, false),
+                      );
                     },
                   ),
                 ),
@@ -170,7 +175,8 @@ class _DetailScreenState extends State<DetailScreen> {
                       length: state.trailer.trailer.length,
                       onExitFullScreen: () {
                         SystemChrome.setPreferredOrientations(
-                            DeviceOrientation.values);
+                          DeviceOrientation.values,
+                        );
                       },
                     );
                   },
@@ -184,8 +190,11 @@ class _DetailScreenState extends State<DetailScreen> {
               } else if (state is TrailerNoInternetConnection) {
                 return NoInternetWidget(
                   message: AppConstant.noInternetConnection,
-                  onPressed: () => _loadTrailer(context,
-                      widget.arguments.movies.id, widget.arguments.isFromMovie),
+                  onPressed: () => _loadTrailer(
+                    context,
+                    widget.arguments.movies.id,
+                    widget.arguments.isFromMovie,
+                  ),
                 );
               } else {
                 return Center(child: Text(""));
@@ -237,8 +246,11 @@ class _DetailScreenState extends State<DetailScreen> {
               } else if (state is CrewNoInternetConnection) {
                 return NoInternetWidget(
                   message: AppConstant.noInternetConnection,
-                  onPressed: () => _loadCrew(context,
-                      widget.arguments.movies.id, widget.arguments.isFromMovie),
+                  onPressed: () => _loadCrew(
+                    context,
+                    widget.arguments.movies.id,
+                    widget.arguments.isFromMovie,
+                  ),
                 );
               } else {
                 return Center(child: Text(""));
