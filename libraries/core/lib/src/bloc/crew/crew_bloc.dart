@@ -1,64 +1,66 @@
 import 'package:core/core.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared/shared.dart';
 
 class CrewBloc extends Bloc<CrewEvent, CrewState> {
   final Repository repository;
 
-  CrewBloc({this.repository}) : super(InitialCrew());
-
-  @override
-  Stream<CrewState> mapEventToState(CrewEvent event) async* {
-    if (event is LoadCrew) {
+  CrewBloc({required this.repository}) : super(InitialCrew()) {
+    on<LoadCrew>((event, emit) async {
       if (event.isFromMovie) {
-        yield* _mapLoadMovieCrewToState(event.movieId);
-      } else if (!event.isFromMovie) {
-        yield* _mapLoadTvShowCrewToState(event.movieId);
+        await _loadMovieCrew(event.movieId, emit);
+      } else {
+        await _loadTvShowCrew(event.movieId, emit);
       }
-    }
+    });
   }
 
-  Stream<CrewState> _mapLoadMovieCrewToState(int movieId) async* {
+  Future<void> _loadMovieCrew(int movieId, Emitter<CrewState> emit) async {
     try {
-      yield CrewLoading();
+      emit(CrewLoading());
       var movies = await repository.getMovieCrew(
-          movieId, ApiConstant.apiKey, ApiConstant.language);
+        movieId,
+        ApiConstant.apiKey,
+        ApiConstant.language,
+      );
       if (movies.crew.isEmpty) {
-        yield CrewNoData(AppConstant.noCrew);
+        emit(CrewNoData(AppConstant.noCrew));
       } else {
-        yield CrewHasData(movies);
+        emit(CrewHasData(movies));
       }
-    } on DioError catch (e) {
-      if (e.type == DioErrorType.CONNECT_TIMEOUT ||
-          e.type == DioErrorType.RECEIVE_TIMEOUT) {
-        yield CrewNoInternetConnection();
-      } else if (e.type == DioErrorType.DEFAULT) {
-        yield CrewNoInternetConnection();
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.receiveTimeout) {
+        emit(CrewNoInternetConnection());
+      } else if (e.type == DioExceptionType.unknown) {
+        emit(CrewNoInternetConnection());
       } else {
-        yield CrewError(e.toString());
+        emit(CrewError(e.toString()));
       }
     }
   }
 
-  Stream<CrewState> _mapLoadTvShowCrewToState(int tvId) async* {
+  Future<void> _loadTvShowCrew(int tvId, Emitter<CrewState> emit) async {
     try {
-      yield CrewLoading();
+      emit(CrewLoading());
       var tvShow = await repository.getTvShowCrew(
-          tvId, ApiConstant.apiKey, ApiConstant.language);
+        tvId,
+        ApiConstant.apiKey,
+        ApiConstant.language,
+      );
       if (tvShow.crew.isEmpty) {
-        yield CrewNoData(AppConstant.noCrew);
+        emit(CrewNoData(AppConstant.noCrew));
       } else {
-        yield CrewHasData(tvShow);
+        emit(CrewHasData(tvShow));
       }
-    } on DioError catch (e) {
-      if (e.type == DioErrorType.CONNECT_TIMEOUT ||
-          e.type == DioErrorType.RECEIVE_TIMEOUT) {
-        yield CrewNoInternetConnection();
-      } else if (e.type == DioErrorType.DEFAULT) {
-        yield CrewNoInternetConnection();
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.receiveTimeout) {
+        emit(CrewNoInternetConnection());
+      } else if (e.type == DioExceptionType.unknown) {
+        emit(CrewNoInternetConnection());
       } else {
-        yield CrewError(e.toString());
+        emit(CrewError(e.toString()));
       }
     }
   }

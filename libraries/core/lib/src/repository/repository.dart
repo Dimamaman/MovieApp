@@ -26,7 +26,7 @@ abstract class Repository {
       String language = ApiConstant.language]);
 
   Future<ResultCrew> getMovieCrew(
-      [int movieId,
+      [int? movieId,
       String apiKey = ApiConstant.apiKey,
       String language = ApiConstant.language]);
 
@@ -35,7 +35,7 @@ abstract class Repository {
       String language = ApiConstant.language]);
 
   Future<ResultCrew> getTvShowCrew(
-      [int tvId,
+      [int? tvId,
       String apiKey = ApiConstant.apiKey,
       String language = ApiConstant.language]);
 
@@ -45,5 +45,5 @@ abstract class Repository {
 
   Future<Result> getDiscoverMovie(
       [String apiKey = ApiConstant.apiKey,
-        String language = ApiConstant.language]);
+      String language = ApiConstant.language]);
 }

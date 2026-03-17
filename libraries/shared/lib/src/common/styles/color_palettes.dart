@@ -2,8 +2,7 @@ library color;
 
 import 'package:flutter/material.dart';
 
-class ColorPalettes{
-
+class ColorPalettes {
   //Colors for theme
   static Color lightPrimary = Color(0xfffcfcff);
   static Color darkPrimary = Color(0xff16161C);
@@ -19,7 +18,7 @@ class ColorPalettes{
   static Color red = Colors.red;
   static Color yellow = Colors.yellow;
   static Color green = Colors.green;
-  static Color setActive = Colors.grey[500];
+  static Color? setActive = Colors.grey[500];
   static Color blueGrey = Colors.blueGrey;
   static Color black = Color(0xFF000000);
   static Color black12 = Colors.black12;
@@ -29,8 +28,8 @@ class ColorPalettes{
     Color r = ColorPalettes.red;
     if (s > 4.5 && s < 7)
       r = ColorPalettes.yellow;
-    else if (s >= 7) r = ColorPalettes.green;
+    else if (s >= 7)
+      r = ColorPalettes.green;
     return r;
   }
-
 }

@@ -2,25 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
 class DateWidget extends StatefulWidget {
+  const DateWidget({super.key});
+
   @override
-  _DateWidgetState createState() => _DateWidgetState();
+  State<DateWidget> createState() => _DateWidgetState();
 }
 
 class _DateWidgetState extends State<DateWidget> with TickerProviderStateMixin {
-  var _dateSelectorAcList = List<AnimationController>();
-  var _dateSelectorTweenList = List<Animation<double>>();
+  final _dateSelectorAcList = <AnimationController>[];
+  final _dateSelectorTweenList = <Animation<double>>[];
 
-  AnimationController _dateBackgroundAc;
-  Animation<double> _dateBackgroundTween;
+  late AnimationController _dateBackgroundAc;
+  late Animation<double> _dateBackgroundTween;
 
-  var _currentDate = DateTime.now();
+  final _currentDate = DateTime.now();
   var _dateIndexSelected = 1;
-  bool _isDarkTheme;
+  bool _isDarkTheme = false;
 
   @override
   void initState() {
     super.initState();
-    // initialize dateSelector List
     for (int i = 0; i < 7; i++) {
       _dateSelectorAcList.add(AnimationController(
           vsync: this, duration: Duration(milliseconds: 500)));
@@ -32,7 +33,6 @@ class _DateWidgetState extends State<DateWidget> with TickerProviderStateMixin {
       });
     }
 
-    // initialize dateSelector Background
     _dateBackgroundAc =
         AnimationController(vsync: this, duration: Duration(milliseconds: 700));
     _dateBackgroundTween = Tween<double>(begin: 1000, end: 0)
@@ -61,23 +61,26 @@ class _DateWidgetState extends State<DateWidget> with TickerProviderStateMixin {
 
   Color _backgroundColor() {
     if (!_isDarkTheme) {
-      return ColorPalettes.white.withOpacity(.1);
+      return ColorPalettes.white.withValues(alpha: 0.1);
     } else {
-      return ColorPalettes.black.withOpacity(.1);
+      return ColorPalettes.black.withValues(alpha: 0.1);
     }
   }
 
   @override
   void dispose() {
     _dateBackgroundAc.dispose();
+    for (var ac in _dateSelectorAcList) {
+      ac.dispose();
+    }
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
-    _isDarkTheme = themeData.appBarTheme?.color == null;
-    return Container(
+    _isDarkTheme = themeData.appBarTheme.backgroundColor == null;
+    return SizedBox(
       height: Sizes.width(context) / 3.5,
       child: Stack(
         alignment: Alignment.centerLeft,

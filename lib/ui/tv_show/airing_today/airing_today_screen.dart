@@ -14,7 +14,7 @@ class AiringTodayScreen extends StatefulWidget {
 }
 
 class _AiringTodayScreenState extends State<AiringTodayScreen> {
-  Completer<void> _refreshCompleter;
+  late Completer<void> _refreshCompleter;
 
   _loadTvAiring(BuildContext context) {
     context.read<TvAiringTodayBloc>().add(LoadTvAiringToday());
@@ -45,7 +45,7 @@ class _AiringTodayScreenState extends State<AiringTodayScreen> {
         child: BlocBuilder<TvAiringTodayBloc, TvAiringTodayState>(
           builder: (context, state) {
             if (state is TvAiringTodayHasData) {
-              _refreshCompleter?.complete();
+              _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return ListView.builder(
                 itemCount: state.result.results.length,
@@ -71,15 +71,15 @@ class _AiringTodayScreenState extends State<AiringTodayScreen> {
             } else if (state is TvAiringTodayLoading) {
               return ShimmerList();
             } else if (state is TvAiringTodayError) {
-              _refreshCompleter?.complete();
+              _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return CustomErrorWidget(message: state.errorMessage);
             } else if (state is TvAiringTodayNoData) {
-              _refreshCompleter?.complete();
+              _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return CustomErrorWidget(message: state.message);
             } else if (state is TvAiringTodayNoInternetConnection) {
-              _refreshCompleter?.complete();
+              _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return NoInternetWidget(
                 message: AppConstant.noInternetConnection,

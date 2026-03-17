@@ -2,24 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
 class CardMoviesHeader extends StatelessWidget {
-  final bool isFromBanner;
-  final int idMovie;
-  final List<Widget> genre;
-  final String title;
-  final String imageBanner;
-  final String imagePoster;
-  final double rating;
+  final bool? isFromBanner;
+  final int? idMovie;
+  final List<Widget>? genre;
+  final String? title;
+  final String? imageBanner;
+  final String? imagePoster;
+  final double? rating;
 
   const CardMoviesHeader(
-      {Key key,
+      {super.key,
       this.isFromBanner,
       this.idMovie,
       this.genre,
       this.title,
       this.imageBanner,
       this.imagePoster,
-      this.rating})
-      : super(key: key);
+      this.rating});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class CardMoviesHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          title,
+          title ?? '',
           style: TextStyle(
             fontSize: Sizes.dp20(context),
             fontWeight: FontWeight.bold,
@@ -43,7 +42,7 @@ class CardMoviesHeader extends StatelessWidget {
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: genre,
+              children: genre ?? [],
             ),
           ),
         ),
@@ -54,7 +53,7 @@ class CardMoviesHeader extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.only(bottom: Sizes.width(context) / 3),
-          child: ArcBannerImage(imageBanner),
+          child: ArcBannerImage(imageBanner ?? ''),
         ),
         Positioned(
           bottom: 0.0,
@@ -65,9 +64,9 @@ class CardMoviesHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Hero(
-                tag: isFromBanner ? idMovie : imagePoster,
+                tag: (isFromBanner ?? false) ? (idMovie ?? 0) : (imagePoster ?? ''),
                 child: Poster(
-                  imagePoster,
+                  imagePoster ?? '',
                   Sizes.width(context) / 2,
                 ),
               ),

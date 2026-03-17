@@ -3,18 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
 class CardHome extends StatelessWidget {
-  final String image, title;
-  final Function onTap;
-  final double rating;
+  final String? image, title;
+  final VoidCallback? onTap;
+  final double? rating;
 
-  const CardHome({Key key, this.image, this.title, this.onTap, this.rating})
-      : super(key: key);
+  const CardHome({super.key, this.image, this.title, this.onTap, this.rating});
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    var isDarkTheme = theme.appBarTheme?.color == null;
-    return Container(
+    var isDarkTheme = theme.appBarTheme.backgroundColor == null;
+    return SizedBox(
       width: Sizes.width(context) / 2.5,
       child: GestureDetector(
         onTap: onTap,
@@ -23,23 +22,18 @@ class CardHome extends StatelessWidget {
               borderRadius: BorderRadius.circular(Sizes.dp10(context))),
           child: Stack(
             children: <Widget>[
-              // Image
-              Container(
-                child: ClipRRect(
-                  borderRadius:
-                      BorderRadius.all(Radius.circular(Sizes.dp10(context))),
-                  child: CachedNetworkImage(
-                    imageUrl: image.imageOriginal,
-                    height: Sizes.width(context) / 1.8,
-                    width: Sizes.width(context) / 2.5,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => LoadingIndicator(),
-                    errorWidget: (context, url, error) => ErrorImage(),
-                  ),
+              ClipRRect(
+                borderRadius:
+                    BorderRadius.all(Radius.circular(Sizes.dp10(context))),
+                child: CachedNetworkImage(
+                  imageUrl: (image ?? '').imageOriginal,
+                  height: Sizes.width(context) / 1.8,
+                  width: Sizes.width(context) / 2.5,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => LoadingIndicator(),
+                  errorWidget: (context, url, error) => ErrorImage(),
                 ),
               ),
-
-              // Background
               Container(
                 height: Sizes.width(context) / 1.8,
                 width: Sizes.width(context) / 2.5,
@@ -57,8 +51,6 @@ class CardHome extends StatelessWidget {
                   ),
                 ),
               ),
-
-              // Text and Rating
               Positioned(
                 left: 0,
                 bottom: 0,
@@ -74,7 +66,7 @@ class CardHome extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       Text(
-                        title,
+                        title ?? '',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: TextStyle(
@@ -85,9 +77,7 @@ class CardHome extends StatelessWidget {
                                 : ColorPalettes.white),
                       ),
                       SizedBox(height: Sizes.dp4(context)),
-
-                      // Rating
-                      buildRatingBar(theme, context, rating),
+                      buildRatingBar(theme, context, rating ?? 0.0),
                       SizedBox(height: Sizes.dp10(context)),
                     ],
                   ),

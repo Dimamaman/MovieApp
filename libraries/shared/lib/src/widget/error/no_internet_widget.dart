@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
 class NoInternetWidget extends StatelessWidget {
-  final String message;
-  final Function onPressed;
+  final String? message;
+  final VoidCallback? onPressed;
 
-  const NoInternetWidget({Key key, this.message, this.onPressed})
-      : super(key: key);
+  const NoInternetWidget({super.key, this.message, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -15,16 +14,18 @@ class NoInternetWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          message,
+          message ?? '',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: Sizes.dp12(context),
           ),
         ),
         SizedBox(height: Sizes.dp10(context)),
-        RaisedButton.icon(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(Sizes.dp10(context)),
+        ElevatedButton.icon(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(Sizes.dp10(context)),
+            ),
           ),
           icon: Icon(Icons.wifi),
           onPressed: onPressed,

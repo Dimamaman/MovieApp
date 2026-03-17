@@ -1,12 +1,11 @@
 import 'package:core/core.dart';
-import 'package:flutter/cupertino.dart';
 
 class MovieRepository implements Repository {
   final ApiRepository apiRepository;
   final LocalRepository localRepository;
 
   MovieRepository(
-      {@required this.apiRepository, @required this.localRepository});
+      {required this.apiRepository, required this.localRepository});
 
   @override
   Future<Result> getMovieNowPlaying(
@@ -119,7 +118,7 @@ class MovieRepository implements Repository {
 
   @override
   Future<ResultCrew> getMovieCrew(
-      [int movieId,
+      [int? movieId,
       String apiKey = ApiConstant.apiKey,
       String language = ApiConstant.language]) async {
     final data = await apiRepository.getMovieCrew(movieId, apiKey, language);
@@ -136,7 +135,7 @@ class MovieRepository implements Repository {
 
   @override
   Future<ResultCrew> getTvShowCrew(
-      [int tvId,
+      [int? tvId,
       String apiKey = ApiConstant.apiKey,
       String language = ApiConstant.language]) async {
     final data = await apiRepository.getTvShowCrew(tvId, apiKey, language);

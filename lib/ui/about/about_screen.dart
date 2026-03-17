@@ -9,10 +9,10 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _themeData = Theme.of(context);
-    var _isDarkTheme = _themeData.appBarTheme?.color == null;
+    var _isDarkTheme = _themeData.appBarTheme.backgroundColor == null;
     return Scaffold(
       body: Stack(
-        overflow: Overflow.visible,
+        clipBehavior: Clip.none,
         children: <Widget>[
           Container(
             color: ColorPalettes.lightAccent,

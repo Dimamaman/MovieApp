@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
 class CustomButton extends StatefulWidget {
-  final Function onPressed;
-  final String text;
+  final VoidCallback? onPressed;
+  final String? text;
 
-  const CustomButton({Key key, this.onPressed, this.text}) : super(key: key);
+  const CustomButton({super.key, this.onPressed, this.text});
 
   @override
-  _CustomButtonState createState() => _CustomButtonState();
+  State<CustomButton> createState() => _CustomButtonState();
 }
 
 class _CustomButtonState extends State<CustomButton>
     with TickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation<double> _animationTween;
+  late AnimationController _animationController;
+  late Animation<double> _animationTween;
 
   @override
   void initState() {
@@ -52,19 +52,21 @@ class _CustomButtonState extends State<CustomButton>
           child: Opacity(opacity: opacity(), child: child),
         );
       },
-      child: Container(
+      child: SizedBox(
         width: Sizes.width(context) * .9,
         height: Sizes.width(context) / 7,
-        child: FlatButton(
-          color: ColorPalettes.darkAccent,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              Sizes.dp10(context),
+        child: TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor: ColorPalettes.darkAccent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                Sizes.dp10(context),
+              ),
             ),
           ),
           onPressed: widget.onPressed,
           child: Text(
-            widget.text,
+            widget.text ?? '',
             style: TextStyle(
               color: ColorPalettes.white,
               fontWeight: FontWeight.bold,

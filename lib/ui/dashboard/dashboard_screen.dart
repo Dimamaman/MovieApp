@@ -6,16 +6,16 @@ import 'package:shared/shared.dart';
 
 class DashBoardScreen extends StatefulWidget {
   static const routeName = '/';
-  final String title;
+  final String? title;
 
-  const DashBoardScreen({Key key, this.title}) : super(key: key);
+  const DashBoardScreen({super.key, this.title});
 
   @override
-  _DashBoardScreenState createState() => _DashBoardScreenState();
+  State<DashBoardScreen> createState() => _DashBoardScreenState();
 }
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
-  PageController _pageController;
+  late PageController _pageController;
   int _page = 0;
 
   void _navigationTapped(int page) {
@@ -36,8 +36,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
 
   @override
   void dispose() {
-    super.dispose();
     _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -60,36 +60,25 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           color: ColorPalettes.white,
         ),
       ),
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-          // sets the background color of the `BottomNavigationBar`
-          canvasColor: Theme.of(context).primaryColor,
-          // sets the active color of the `BottomNavigationBar` if `Brightness` is light
-          primaryColor: Theme.of(context).accentColor,
-          textTheme: Theme.of(context).textTheme.copyWith(
-                caption: TextStyle(color: ColorPalettes.setActive),
-              ),
-        ),
-        child: BottomAppBar(
-          shape: CircularNotchedRectangle(),
-          notchMargin: Sizes.dp8(context),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                color:
-                    _page == 0 ? ColorPalettes.darkAccent : ColorPalettes.grey,
-                icon: Icon(Icons.movie_creation),
-                onPressed: () => _navigationTapped(0),
-              ),
-              IconButton(
-                color:
-                    _page == 1 ? ColorPalettes.darkAccent : ColorPalettes.grey,
-                icon: Icon(Icons.live_tv),
-                onPressed: () => _navigationTapped(1),
-              ),
-            ],
-          ),
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: Sizes.dp8(context),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              color:
+                  _page == 0 ? ColorPalettes.darkAccent : ColorPalettes.grey,
+              icon: Icon(Icons.movie_creation),
+              onPressed: () => _navigationTapped(0),
+            ),
+            IconButton(
+              color:
+                  _page == 1 ? ColorPalettes.darkAccent : ColorPalettes.grey,
+              icon: Icon(Icons.live_tv),
+              onPressed: () => _navigationTapped(1),
+            ),
+          ],
         ),
       ),
     );

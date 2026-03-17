@@ -11,15 +11,15 @@ class BannerHome extends StatelessWidget {
   final String routeNameDetail, routeNameAll;
   final bool isFromMovie;
 
-  const BannerHome(
-      {Key key,
-      this.onPageChanged,
-      this.data,
-      this.currentIndex,
-      this.routeNameDetail,
-      this.routeNameAll,
-      @required this.isFromMovie})
-      : super(key: key);
+  const BannerHome({
+    Key? key,
+    required this.onPageChanged,
+    required this.data,
+    required this.currentIndex,
+    required this.routeNameDetail,
+    required this.routeNameAll,
+    required this.isFromMovie,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

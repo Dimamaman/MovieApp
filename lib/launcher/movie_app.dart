@@ -79,7 +79,7 @@ class MyApp extends StatelessWidget {
         OnTheAirScreen.routeName: (context) => OnTheAirScreen(),
         TvPopularScreen.routeName: (context) => TvPopularScreen(),
         DetailScreen.routeName: (context) => DetailScreen(
-              arguments: ModalRoute.of(context).settings.arguments,
+              arguments: ModalRoute.of(context)!.settings.arguments as ScreenArguments,
             ),
         SettingScreen.routeName: (context) => SettingScreen(),
         AboutScreen.routeName: (context) => AboutScreen(),

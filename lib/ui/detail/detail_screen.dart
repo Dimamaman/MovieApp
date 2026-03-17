@@ -11,10 +11,10 @@ class DetailScreen extends StatefulWidget {
 
   final ScreenArguments arguments;
 
-  const DetailScreen({Key key, @required this.arguments});
+  const DetailScreen({super.key, required this.arguments});
 
   @override
-  _DetailScreenState createState() => _DetailScreenState();
+  State<DetailScreen> createState() => _DetailScreenState();
 }
 
 class _DetailScreenState extends State<DetailScreen> {
@@ -116,7 +116,7 @@ class _DetailScreenState extends State<DetailScreen> {
               right: Sizes.dp5(context),
               child: IconButton(
                 iconSize: Sizes.dp30(context),
-                color: theme.accentColor,
+                color: theme.colorScheme.secondary,
                 icon: Icon(Icons.favorite_border),
                 onPressed: () {
                   PopUp.showSuccess("Add to Favorite");
@@ -151,7 +151,7 @@ class _DetailScreenState extends State<DetailScreen> {
           ),
         ),
         SizedBox(height: Sizes.dp8(context)),
-        Container(
+        SizedBox(
           width: Sizes.width(context),
           height: Sizes.width(context) / 1.7,
           child: BlocBuilder<TrailerBloc, TrailerState>(
@@ -169,7 +169,6 @@ class _DetailScreenState extends State<DetailScreen> {
                       youtube: trailer.youtubeId,
                       length: state.trailer.trailer.length,
                       onExitFullScreen: () {
-                        // The player forces portraitUp after exiting fullscreen. This overrides the behaviour.
                         SystemChrome.setPreferredOrientations(
                             DeviceOrientation.values);
                       },
@@ -210,7 +209,7 @@ class _DetailScreenState extends State<DetailScreen> {
           ),
         ),
         SizedBox(height: Sizes.dp8(context)),
-        Container(
+        SizedBox(
           width: Sizes.width(context),
           height: Sizes.width(context) / 3,
           child: BlocBuilder<CrewBloc, CrewState>(

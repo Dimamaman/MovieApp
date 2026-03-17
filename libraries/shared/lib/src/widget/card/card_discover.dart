@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
 class CardDiscover extends StatelessWidget {
-  final String image, title;
-  final double rating;
-  final List<int> genre;
-  final Function onTap;
+  final String? image, title;
+  final double? rating;
+  final List<int>? genre;
+  final VoidCallback? onTap;
 
   const CardDiscover(
-      {Key key, this.image, this.title, this.rating, this.genre, this.onTap})
-      : super(key: key);
+      {super.key, this.image, this.title, this.rating, this.genre, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    var ratingValue = rating ?? 0.0;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -24,7 +24,7 @@ class CardDiscover extends StatelessWidget {
           child: GestureDetector(
             onTap: onTap,
             child: CachedNetworkImage(
-              imageUrl: image.imageOriginal,
+              imageUrl: (image ?? '').imageOriginal,
               width: Sizes.width(context) / 2,
               placeholder: (context, url) => ShimmerDiscover(),
               errorWidget: (context, url, error) => ErrorImage(),
@@ -35,7 +35,7 @@ class CardDiscover extends StatelessWidget {
           height: Sizes.height(context) * .02,
         ),
         Text(
-          title,
+          title ?? '',
           textAlign: TextAlign.center,
           style: TextStyle(
               color: Colors.white,
@@ -48,14 +48,14 @@ class CardDiscover extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: genre.take(3).map(_buildGenreChip).toList(),
+            children: (genre ?? []).take(3).map(_buildGenreChip).toList(),
           ),
         ),
         SizedBox(
           height: Sizes.height(context) * .01,
         ),
         Text(
-          rating.toString(),
+          ratingValue.toString(),
           style: TextStyle(
             color: Colors.white,
             fontSize: Sizes.width(context) / 16,
@@ -64,7 +64,7 @@ class CardDiscover extends StatelessWidget {
         SizedBox(
           height: Sizes.height(context) * .005,
         ),
-        buildRatingBar(theme, context, rating),
+        buildRatingBar(theme, context, ratingValue),
       ],
     );
   }
@@ -74,7 +74,7 @@ class CardDiscover extends StatelessWidget {
       margin: EdgeInsets.only(right: 10),
       padding: EdgeInsets.all(8),
       child: Text(
-        Genres.genres[id],
+        Genres.genres[id] ?? '',
         style: TextStyle(fontSize: 12, color: ColorPalettes.white),
       ),
       decoration: BoxDecoration(

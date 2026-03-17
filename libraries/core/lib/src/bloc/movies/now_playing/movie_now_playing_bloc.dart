@@ -6,33 +6,30 @@ import 'package:shared/shared.dart';
 class MovieNowPlayingBloc extends Bloc<MovieNowPlayingEvent, MovieNowPlayingState> {
   final Repository repository;
 
-  MovieNowPlayingBloc({this.repository}) : super(InitialMovieNowPlaying());
-
-  @override
-  Stream<MovieNowPlayingState> mapEventToState(MovieNowPlayingEvent event) async* {
-    if (event is LoadMovieNowPlaying) {
-      yield* _mapLoadNowPlayingToState();
-    }
+  MovieNowPlayingBloc({required this.repository}) : super(InitialMovieNowPlaying()) {
+    on<LoadMovieNowPlaying>((event, emit) async {
+      await _loadNowPlaying(emit);
+    });
   }
 
-  Stream<MovieNowPlayingState> _mapLoadNowPlayingToState() async* {
+  Future<void> _loadNowPlaying(Emitter<MovieNowPlayingState> emit) async {
     try {
-      yield MovieNowPlayingLoading();
+      emit(MovieNowPlayingLoading());
       var movies = await repository.getMovieNowPlaying(
           ApiConstant.apiKey, ApiConstant.language);
       if (movies.results.isEmpty) {
-        yield MovieNowPlayingNoData(AppConstant.noData);
+        emit(MovieNowPlayingNoData(AppConstant.noData));
       } else {
-        yield MovieNowPlayingHasData(movies);
+        emit(MovieNowPlayingHasData(movies));
       }
-    } on DioError catch (e) {
-      if (e.type == DioErrorType.CONNECT_TIMEOUT ||
-          e.type == DioErrorType.RECEIVE_TIMEOUT) {
-        yield MovieNowPlayingNoInternetConnection();
-      } else if (e.type == DioErrorType.DEFAULT) {
-        yield MovieNowPlayingNoInternetConnection();
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.receiveTimeout) {
+        emit(MovieNowPlayingNoInternetConnection());
+      } else if (e.type == DioExceptionType.unknown) {
+        emit(MovieNowPlayingNoInternetConnection());
       } else {
-        yield MovieNowPlayingError(e.toString());
+        emit(MovieNowPlayingError(e.toString()));
       }
     }
   }

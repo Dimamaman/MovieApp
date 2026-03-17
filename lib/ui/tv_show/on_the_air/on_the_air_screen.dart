@@ -14,7 +14,7 @@ class OnTheAirScreen extends StatefulWidget {
 }
 
 class _OnTheAirScreenState extends State<OnTheAirScreen> {
-  Completer<void> _refreshCompleter;
+  late Completer<void> _refreshCompleter;
 
   _loadTvOnAir(BuildContext context) {
     context.read<TvOnTheAirBloc>().add(LoadTvOnTheAir());
@@ -45,7 +45,7 @@ class _OnTheAirScreenState extends State<OnTheAirScreen> {
         child: BlocBuilder<TvOnTheAirBloc, TvOnTheAirState>(
           builder: (context, state) {
             if (state is TvOnTheAirHasData) {
-              _refreshCompleter?.complete();
+              _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return ListView.builder(
                 itemCount: state.result.results.length,
@@ -71,15 +71,15 @@ class _OnTheAirScreenState extends State<OnTheAirScreen> {
             } else if (state is TvOnTheAirLoading) {
               return ShimmerList();
             } else if (state is TvOnTheAirError) {
-              _refreshCompleter?.complete();
+              _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return CustomErrorWidget(message: state.errorMessage);
             } else if (state is TvOnTheAirNoData) {
-              _refreshCompleter?.complete();
+              _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return CustomErrorWidget(message: state.message);
             } else if (state is TvOnTheAirNoInternetConnection) {
-              _refreshCompleter?.complete();
+              _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return NoInternetWidget(
                 message: AppConstant.noInternetConnection,

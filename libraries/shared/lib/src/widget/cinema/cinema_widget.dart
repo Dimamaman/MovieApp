@@ -4,21 +4,21 @@ import 'package:shared/shared.dart';
 import 'package:shared/src/common/utils/chair_constant.dart';
 
 class CinemaWidget extends StatefulWidget {
-  final String movieBackground;
+  final String? movieBackground;
 
-  const CinemaWidget({Key key, this.movieBackground}) : super(key: key);
+  const CinemaWidget({super.key, this.movieBackground});
 
   @override
-  _CinemaWidgetState createState() => _CinemaWidgetState();
+  State<CinemaWidget> createState() => _CinemaWidgetState();
 }
 
 class _CinemaWidgetState extends State<CinemaWidget>
     with TickerProviderStateMixin {
-  AnimationController _cinemaChairAc;
-  Animation<double> _cinemaChairTween;
-  AnimationController _cinemaScreenAc;
-  Animation<double> _cinemaScreenTween;
-  bool _isDarkTheme;
+  late AnimationController _cinemaChairAc;
+  late Animation<double> _cinemaChairTween;
+  late AnimationController _cinemaScreenAc;
+  late Animation<double> _cinemaScreenTween;
+  bool _isDarkTheme = false;
 
   var _chairStatus = [
     [0, 3, 2, 1, 2, 2, 0],
@@ -33,7 +33,6 @@ class _CinemaWidgetState extends State<CinemaWidget>
   void initState() {
     super.initState();
 
-    // initialize cinemaScreen
     _cinemaScreenAc = AnimationController(
         vsync: this, duration: Duration(milliseconds: 2000));
     _cinemaScreenTween = Tween<double>(begin: 0, end: 1)
@@ -43,7 +42,6 @@ class _CinemaWidgetState extends State<CinemaWidget>
       _cinemaScreenAc.forward();
     });
 
-    // chair
     _cinemaChairAc = AnimationController(
         vsync: this, duration: Duration(milliseconds: 1600));
     _cinemaChairTween = Tween<double>(begin: -1, end: 0)
@@ -64,7 +62,7 @@ class _CinemaWidgetState extends State<CinemaWidget>
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
-    _isDarkTheme = themeData.appBarTheme?.color == null;
+    _isDarkTheme = themeData.appBarTheme.backgroundColor == null;
     return Column(
       children: <Widget>[
         AnimatedBuilder(
@@ -82,7 +80,7 @@ class _CinemaWidgetState extends State<CinemaWidget>
           child: ClipRRect(
             borderRadius: BorderRadius.circular(Sizes.dp10(context)),
             child: CachedNetworkImage(
-              imageUrl: widget.movieBackground.imageOriginal,
+              imageUrl: (widget.movieBackground ?? '').imageOriginal,
               width: Sizes.width(context),
               fit: BoxFit.fill,
               placeholder: (context, url) => LoadingIndicator(),
@@ -100,7 +98,7 @@ class _CinemaWidgetState extends State<CinemaWidget>
                   Opacity(opacity: _cinemaChairTween.value + 1, child: child),
             );
           },
-          child: Container(
+          child: SizedBox(
             width: Sizes.width(context),
             child: _chairList(),
           ),
@@ -110,11 +108,6 @@ class _CinemaWidgetState extends State<CinemaWidget>
   }
 
   Widget _chairList() {
-    // 0 is null
-    // 1 is free
-    // 2 is reserved
-    // 3 is not available
-    // 4 is yours
     return Column(
       children: <Widget>[
         for (int i = 0; i < 6; i++)
@@ -169,8 +162,8 @@ class _CinemaWidgetState extends State<CinemaWidget>
             children: <Widget>[
               _chairCategory(ColorPalettes.white, "FREE", true),
               _chairCategory(ColorPalettes.darkAccent, "YOURS", false),
-              _chairCategory(Colors.grey[700], "RESERVED", false),
-              _chairCategory(Colors.red[800], "NOT AVAILABLE", false),
+              _chairCategory(Colors.grey[700]!, "RESERVED", false),
+              _chairCategory(Colors.red[800]!, "NOT AVAILABLE", false),
             ],
           ),
         ),

@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
 class CardPortfolio extends StatelessWidget {
-  final String imageAsset;
-  final String title;
-  final String url;
+  final String? imageAsset;
+  final String? title;
+  final String? url;
 
-  const CardPortfolio({Key key, this.imageAsset, this.title, this.url})
-      : super(key: key);
+  const CardPortfolio({super.key, this.imageAsset, this.title, this.url});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(Sizes.dp5(context)),
       child: InkWell(
-        onTap: () => Navigation.launchURL(url),
+        onTap: () => Navigation.launchURL(url ?? ''),
         child: Card(
           child: Padding(
             padding: EdgeInsets.all(Sizes.dp10(context)),
@@ -25,7 +24,7 @@ class CardPortfolio extends StatelessWidget {
                   height: Sizes.width(context) / 7,
                   width: Sizes.width(context) / 7,
                   child: Image.asset(
-                    imageAsset,
+                    imageAsset ?? '',
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -38,7 +37,7 @@ class CardPortfolio extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        title,
+                        title ?? '',
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
@@ -49,7 +48,7 @@ class CardPortfolio extends StatelessWidget {
                         height: Sizes.dp18(context),
                       ),
                       Text(
-                        url,
+                        url ?? '',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(

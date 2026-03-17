@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
 class CustomErrorWidget extends StatelessWidget {
-  final String message;
+  final String? message;
 
-  const CustomErrorWidget({Key key, this.message}) : super(key: key);
+  const CustomErrorWidget({super.key, this.message});
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        message,
+        message ?? '',
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: Sizes.dp12(context),

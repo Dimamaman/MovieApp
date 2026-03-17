@@ -4,26 +4,25 @@ import 'package:shared/shared.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class CardTrailer extends StatefulWidget {
-  final String title, youtube;
-  final VoidCallback onExitFullScreen;
-  final int length;
+  final String? title, youtube;
+  final VoidCallback? onExitFullScreen;
+  final int? length;
 
   const CardTrailer(
-      {Key key, this.title, this.youtube, this.onExitFullScreen, this.length})
-      : super(key: key);
+      {super.key, this.title, this.youtube, this.onExitFullScreen, this.length});
 
   @override
-  _CardTrailerState createState() => _CardTrailerState();
+  State<CardTrailer> createState() => _CardTrailerState();
 }
 
 class _CardTrailerState extends State<CardTrailer> with WidgetsBindingObserver {
-  YoutubePlayerController _controller;
+  late YoutubePlayerController _controller;
 
   @override
   void initState() {
     super.initState();
     _controller = YoutubePlayerController(
-      initialVideoId: widget.youtube,
+      initialVideoId: widget.youtube ?? '',
       flags: const YoutubePlayerFlags(
         mute: false,
         autoPlay: false,
@@ -38,7 +37,6 @@ class _CardTrailerState extends State<CardTrailer> with WidgetsBindingObserver {
 
   @override
   void deactivate() {
-    // Pauses video while navigating to next page.
     _controller.pause();
     super.deactivate();
   }
@@ -51,14 +49,16 @@ class _CardTrailerState extends State<CardTrailer> with WidgetsBindingObserver {
 
   @override
   void didChangeMetrics() {
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-    if (widget.onExitFullScreen != null) widget.onExitFullScreen();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
+    widget.onExitFullScreen?.call();
     super.didChangeMetrics();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    var trailerLength = widget.length ?? 0;
+    return SizedBox(
       width: Sizes.width(context) / 1.2,
       child: Column(
         children: [
@@ -86,7 +86,6 @@ class _CardTrailerState extends State<CardTrailer> with WidgetsBindingObserver {
                     ),
                   ),
                 ],
-                // This for hide the full screen button
                 bottomActions: [
                   SizedBox(width: Sizes.dp14(context)),
                   CurrentPosition(),
@@ -99,13 +98,13 @@ class _CardTrailerState extends State<CardTrailer> with WidgetsBindingObserver {
             ),
           ),
           Visibility(
-            visible: widget.length > 1 ? true : false,
+            visible: trailerLength > 1,
             child: SizedBox(
               height: Sizes.dp10(context),
             ),
           ),
           Visibility(
-            visible: widget.length > 1 ? true : false,
+            visible: trailerLength > 1,
             child: Container(
               height: Sizes.dp30(context),
               width: Sizes.width(context),

@@ -14,7 +14,7 @@ class TvPopularScreen extends StatefulWidget {
 }
 
 class _TvPopularScreenState extends State<TvPopularScreen> {
-  Completer<void> _refreshCompleter;
+  late Completer<void> _refreshCompleter;
 
   _loadTvPopular(BuildContext context) {
     context.read<TvPopularBloc>().add(LoadTvPopular());
@@ -45,7 +45,7 @@ class _TvPopularScreenState extends State<TvPopularScreen> {
         child: BlocBuilder<TvPopularBloc, TvPopularState>(
           builder: (context, state) {
             if (state is TvPopularHasData) {
-              _refreshCompleter?.complete();
+              _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return ListView.builder(
                 itemCount: state.result.results.length,
@@ -71,15 +71,15 @@ class _TvPopularScreenState extends State<TvPopularScreen> {
             } else if (state is TvPopularLoading) {
               return ShimmerList();
             } else if (state is TvPopularError) {
-              _refreshCompleter?.complete();
+              _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return CustomErrorWidget(message: state.errorMessage);
             } else if (state is TvPopularNoData) {
-              _refreshCompleter?.complete();
+              _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return CustomErrorWidget(message: state.message);
             } else if (state is TvPopularNoInternetConnection) {
-              _refreshCompleter?.complete();
+              _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return NoInternetWidget(
                 message: AppConstant.noInternetConnection,

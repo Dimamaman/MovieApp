@@ -5,11 +5,14 @@ import 'package:shared/shared.dart';
 class BookingScreen extends StatelessWidget {
   static const routeName = '/booking';
 
+  const BookingScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
-    var _isDarkTheme = themeData.appBarTheme?.color == null;
-    final ScreenArguments args = ModalRoute.of(context).settings.arguments;
+    var _isDarkTheme = themeData.appBarTheme.backgroundColor == null;
+    final ScreenArguments args =
+        ModalRoute.of(context)!.settings.arguments as ScreenArguments;
     return Scaffold(
       backgroundColor:
           !_isDarkTheme ? ColorPalettes.darkPrimary : ColorPalettes.white,

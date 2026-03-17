@@ -6,33 +6,30 @@ import 'package:shared/shared.dart';
 class TvPopularBloc extends Bloc<TvPopularEvent, TvPopularState> {
   final Repository repository;
 
-  TvPopularBloc({this.repository}) : super(InitialTvPopular());
-
-  @override
-  Stream<TvPopularState> mapEventToState(TvPopularEvent event) async* {
-    if (event is LoadTvPopular) {
-      yield* _mapLoadTvPopularToState();
-    }
+  TvPopularBloc({required this.repository}) : super(InitialTvPopular()) {
+    on<LoadTvPopular>((event, emit) async {
+      await _loadTvPopular(emit);
+    });
   }
 
-  Stream<TvPopularState> _mapLoadTvPopularToState() async* {
+  Future<void> _loadTvPopular(Emitter<TvPopularState> emit) async {
     try {
-      yield TvPopularLoading();
+      emit(TvPopularLoading());
       var movies = await repository.getTvPopular(
           ApiConstant.apiKey, ApiConstant.language);
       if (movies.results.isEmpty) {
-        yield TvPopularNoData(AppConstant.noData);
+        emit(TvPopularNoData(AppConstant.noData));
       } else {
-        yield TvPopularHasData(movies);
+        emit(TvPopularHasData(movies));
       }
-    } on DioError catch (e) {
-      if (e.type == DioErrorType.CONNECT_TIMEOUT ||
-          e.type == DioErrorType.RECEIVE_TIMEOUT) {
-        yield TvPopularNoInternetConnection();
-      } else if (e.type == DioErrorType.DEFAULT) {
-        yield TvPopularNoInternetConnection();
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.receiveTimeout) {
+        emit(TvPopularNoInternetConnection());
+      } else if (e.type == DioExceptionType.unknown) {
+        emit(TvPopularNoInternetConnection());
       } else {
-        yield TvPopularError(e.toString());
+        emit(TvPopularError(e.toString()));
       }
     }
   }

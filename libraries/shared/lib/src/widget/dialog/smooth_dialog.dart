@@ -7,17 +7,19 @@ enum SmoothMode { Lottie, Network, Asset }
 
 class ButtonConfig {
   final String dialogDone, dialogCancel;
-  Color buttonCancelColor, buttonDoneColor, labelCancelColor, labelDoneColor;
+  late Color buttonCancelColor, buttonDoneColor, labelCancelColor, labelDoneColor;
 
   ButtonConfig(
       {this.dialogDone = 'Done',
       this.dialogCancel = 'Cancel',
-      this.buttonCancelColor,
-      this.buttonDoneColor}) {
-    if (buttonCancelColor == null) buttonCancelColor = ColorPalettes.white;
-    if (buttonDoneColor == null) buttonDoneColor = ColorPalettes.darkAccent;
-    if (labelCancelColor == null) labelCancelColor = ColorPalettes.black;
-    if (labelDoneColor == null) labelDoneColor = ColorPalettes.white;
+      Color? buttonCancelColor,
+      Color? buttonDoneColor,
+      Color? labelCancelColor,
+      Color? labelDoneColor}) {
+    this.buttonCancelColor = buttonCancelColor ?? ColorPalettes.white;
+    this.buttonDoneColor = buttonDoneColor ?? ColorPalettes.darkAccent;
+    this.labelCancelColor = labelCancelColor ?? ColorPalettes.black;
+    this.labelDoneColor = labelDoneColor ?? ColorPalettes.white;
   }
 }
 
@@ -28,26 +30,25 @@ class SmoothDialog {
   final double dialogHeight;
   final double imageHeight;
   final double imageWidth;
-  final Function submit;
+  final VoidCallback? submit;
   final BuildContext context;
 
-  ButtonConfig buttonConfig;
+  late ButtonConfig buttonConfig;
   SmoothMode mode = SmoothMode.Lottie;
 
   SmoothDialog({
-    Key key,
-    @required this.context,
-    @required this.path,
-    @required this.title,
-    @required this.content,
-    @required this.submit,
-    @required this.mode,
-    this.buttonConfig,
+    required this.context,
+    required this.path,
+    required this.title,
+    required this.content,
+    required this.submit,
+    required this.mode,
+    ButtonConfig? buttonConfig,
     this.imageHeight = 150,
     this.imageWidth = 150,
     this.dialogHeight = 310,
   }) {
-    if (buttonConfig == null) buttonConfig = ButtonConfig();
+    this.buttonConfig = buttonConfig ?? ButtonConfig();
 
     showDialog(
       context: context,
@@ -59,7 +60,7 @@ class SmoothDialog {
                   borderRadius:
                       BorderRadius.all(Radius.circular(Sizes.dp16(context)))),
               contentPadding: EdgeInsets.fromLTRB(16, 24, 16, 8),
-              content: Container(
+              content: SizedBox(
                 width: double.maxFinite,
                 height: dialogHeight,
                 child: Column(
@@ -138,18 +139,20 @@ class SmoothDialog {
                                             vertical: Sizes.dp12(context),
                                             horizontal: Sizes.dp22(context)),
                                         decoration: BoxDecoration(
-                                            color:
-                                                buttonConfig.buttonCancelColor,
+                                            color: this
+                                                .buttonConfig
+                                                .buttonCancelColor,
                                             borderRadius: BorderRadius.circular(
                                                 Sizes.dp16(context))),
                                         child: Text(
-                                          "${buttonConfig.dialogCancel}",
+                                          this.buttonConfig.dialogCancel,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: Sizes.dp13(context),
                                             fontWeight: FontWeight.bold,
-                                            color:
-                                                buttonConfig.labelCancelColor,
+                                            color: this
+                                                .buttonConfig
+                                                .labelCancelColor,
                                           ),
                                         ),
                                       ),
@@ -158,23 +161,26 @@ class SmoothDialog {
                                     InkWell(
                                       onTap: () {
                                         Navigation.back(context);
-                                        submit();
+                                        submit?.call();
                                       },
                                       child: Container(
                                         padding: EdgeInsets.symmetric(
                                             vertical: Sizes.dp12(context),
                                             horizontal: Sizes.dp26(context)),
                                         decoration: BoxDecoration(
-                                            color: buttonConfig.buttonDoneColor,
+                                            color: this
+                                                .buttonConfig
+                                                .buttonDoneColor,
                                             borderRadius: BorderRadius.circular(
                                                 Sizes.dp16(context))),
                                         child: Text(
-                                          "${buttonConfig.dialogDone}",
+                                          this.buttonConfig.dialogDone,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: Sizes.dp13(context),
                                             fontWeight: FontWeight.bold,
-                                            color: buttonConfig.labelDoneColor,
+                                            color:
+                                                this.buttonConfig.labelDoneColor,
                                           ),
                                         ),
                                       ),

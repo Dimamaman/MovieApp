@@ -6,7 +6,7 @@ import 'app_test_key.dart';
 void main() {
   group("Movies Development Test", (){
 
-    FlutterDriver driver;
+    late FlutterDriver driver;
 
     setUpAll(() async {
       driver = await FlutterDriver.connect();

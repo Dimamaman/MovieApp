@@ -59,15 +59,15 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         errorWidget: (context, url, error) => ErrorImage(),
                       ),
                       Container(
-                        color: ColorPalettes.grey.withOpacity(.6),
+                        color: ColorPalettes.grey.withValues(alpha: 0.6),
                       ),
                       Container(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                               colors: [
-                                ColorPalettes.black.withOpacity(.9),
-                                ColorPalettes.black.withOpacity(.3),
-                                ColorPalettes.black.withOpacity(.95)
+                                ColorPalettes.black.withValues(alpha: 0.9),
+                                ColorPalettes.black.withValues(alpha: 0.3),
+                                ColorPalettes.black.withValues(alpha: 0.95)
                               ],
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,

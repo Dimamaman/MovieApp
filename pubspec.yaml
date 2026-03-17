@@ -3,7 +3,7 @@ description: A new Flutter application.
 version: 1.2.1+4
 
 environment:
-  sdk: ">=2.6.0 <3.0.0"
+  sdk: '>=3.8.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -28,6 +28,7 @@ flutter_icons:
   android: true
   ios: true
   image_path: "assets/images/movie_icon.png"
+  build_runner: any
 
 flutter:
   uses-material-design: true

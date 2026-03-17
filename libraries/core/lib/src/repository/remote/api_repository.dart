@@ -1,11 +1,10 @@
 import 'package:core/core.dart';
 import 'package:core/src/network/api/api_service.dart';
-import 'package:flutter/cupertino.dart';
 
 class ApiRepository implements Repository {
   final ApiService apiService;
 
-  ApiRepository({@required this.apiService});
+  ApiRepository({required this.apiService});
 
   @override
   Future<Result> getMovieNowPlaying(
@@ -51,10 +50,10 @@ class ApiRepository implements Repository {
 
   @override
   Future<ResultCrew> getMovieCrew(
-      [int movieId,
+      [int? movieId,
       String apiKey = ApiConstant.apiKey,
       String language = ApiConstant.language]) async {
-    return apiService.getMovieCrews(movieId, apiKey, language);
+    return apiService.getMovieCrews(movieId!, apiKey, language);
   }
 
   @override
@@ -66,10 +65,10 @@ class ApiRepository implements Repository {
 
   @override
   Future<ResultCrew> getTvShowCrew(
-      [int tvId,
+      [int? tvId,
       String apiKey = ApiConstant.apiKey,
       String language = ApiConstant.language]) {
-    return apiService.getTvShowCrews(tvId, apiKey, language);
+    return apiService.getTvShowCrews(tvId!, apiKey, language);
   }
 
   @override

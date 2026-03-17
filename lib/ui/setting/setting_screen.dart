@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moviecatalogue/ui/about/about_screen.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared/shared.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -64,7 +64,7 @@ class SettingScreen extends StatelessWidget {
                                   ? state.isDarkTheme
                                   : false,
                               onChanged: (value) {
-                                context.read<ThemeBloc>().add(ThemeChanged(isDarkTheme: value));
+                                context.read<ThemeBloc>().add(ThemeChanged(isDarkTheme: value ?? false));
                               },
                             );
                           },

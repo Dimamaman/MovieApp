@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
 class TimeWidget extends StatefulWidget {
+  const TimeWidget({super.key});
+
   @override
-  _TimeWidgetState createState() => _TimeWidgetState();
+  State<TimeWidget> createState() => _TimeWidgetState();
 }
 
 class _TimeWidgetState extends State<TimeWidget> with TickerProviderStateMixin {
-  var _timeSelectorAcList = List<AnimationController>();
-  var _timeSelectorTweenList = List<Animation<double>>();
-  bool _isDarkTheme;
+  final _timeSelectorAcList = <AnimationController>[];
+  final _timeSelectorTweenList = <Animation<double>>[];
+  bool _isDarkTheme = false;
 
-  var _time = [
+  final _time = [
     ["01.30", 45],
     ["06.30", 45],
     ["10.30", 45]
@@ -21,7 +23,6 @@ class _TimeWidgetState extends State<TimeWidget> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    // initialize timeSelector List
     for (int i = 0; i < 3; i++) {
       _timeSelectorAcList.add(AnimationController(
           vsync: this, duration: Duration(milliseconds: 500)));
@@ -35,9 +36,17 @@ class _TimeWidgetState extends State<TimeWidget> with TickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    for (var ac in _timeSelectorAcList) {
+      ac.dispose();
+    }
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var themeData = Theme.of(context);
-    _isDarkTheme = themeData.appBarTheme?.color == null;
+    _isDarkTheme = themeData.appBarTheme.backgroundColor == null;
     return Container(
       width: Sizes.width(context),
       height: Sizes.width(context) / 5,
@@ -62,9 +71,9 @@ class _TimeWidgetState extends State<TimeWidget> with TickerProviderStateMixin {
                 });
               },
               child: _timeItem(
-                _time[index][0],
-                _time[index][1],
-                index == _timeIndexSelected ? true : false,
+                _time[index][0] as String,
+                _time[index][1] as int,
+                index == _timeIndexSelected,
               ),
             ),
           );

@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
 class CircleProgress extends StatelessWidget {
-  final String vote;
+  final String? vote;
 
-  const CircleProgress({Key key, this.vote}) : super(key: key);
+  const CircleProgress({super.key, this.vote});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    var voteValue = vote ?? '0';
+    return SizedBox(
       width: Sizes.width(context) / 10,
       height: Sizes.width(context) / 10,
       child: Stack(
@@ -26,28 +27,28 @@ class CircleProgress extends StatelessWidget {
             ),
           ),
           Center(
-            child: Container(
+            child: SizedBox(
               width: Sizes.dp30(context),
               height: Sizes.dp30(context),
               child: CircularProgressIndicator(
                 strokeWidth: 3.0,
                 valueColor: AlwaysStoppedAnimation<Color>(
                   ColorPalettes.getColorCircleProgress(
-                    double.parse(vote),
+                    double.parse(voteValue),
                   ),
                 ),
                 backgroundColor: ColorPalettes.grey,
-                value: double.parse(vote) / 10.0,
+                value: double.parse(voteValue) / 10.0,
               ),
             ),
           ),
           Center(
-            child: Container(
+            child: SizedBox(
               width: Sizes.dp30(context),
               height: Sizes.dp30(context),
               child: Center(
                 child: Text(
-                  (double.parse(vote) * 10.0).floor().toString() + '%',
+                  '${(double.parse(voteValue) * 10.0).floor()}%',
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: Sizes.dp10(context),

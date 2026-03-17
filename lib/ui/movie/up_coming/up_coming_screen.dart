@@ -15,7 +15,7 @@ class UpComingScreen extends StatefulWidget {
 }
 
 class _UpComingScreenState extends State<UpComingScreen> {
-  Completer<void> _refreshCompleter;
+  late Completer<void> _refreshCompleter;
 
   _loadMovieUpComing(BuildContext context) {
     context.read<MovieUpComingBloc>().add(LoadMovieUpComing());
@@ -46,7 +46,7 @@ class _UpComingScreenState extends State<UpComingScreen> {
         child: BlocBuilder<MovieUpComingBloc, MovieUpComingState>(
           builder: (context, state) {
             if (state is MovieUpComingHasData) {
-              _refreshCompleter?.complete();
+              _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return ListView.builder(
                 itemCount: state.result.results.length,
@@ -72,15 +72,15 @@ class _UpComingScreenState extends State<UpComingScreen> {
             } else if (state is MovieUpComingLoading) {
               return ShimmerList();
             } else if (state is MovieUpComingError) {
-              _refreshCompleter?.complete();
+              _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return CustomErrorWidget(message: state.errorMessage);
             } else if (state is MovieUpComingNoData) {
-              _refreshCompleter?.complete();
+              _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return CustomErrorWidget(message: state.message);
             } else if (state is MovieUpComingNoInternetConnection) {
-              _refreshCompleter?.complete();
+              _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return NoInternetWidget(
                 message: AppConstant.noInternetConnection,
