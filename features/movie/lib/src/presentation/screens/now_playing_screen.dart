@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 import '../../../feature_movie.dart';
 
@@ -59,10 +59,7 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
                     vote: movie.ratingText,
                     releaseDate: movie.releaseDate,
                     overview: movie.overview,
-                    genre: movie.genreIds
-                        .take(3)
-                        .map(buildGenreChip)
-                        .toList(),
+                    genre: movie.genreIds.take(3).map(buildGenreChip).toList(),
                     onTap: () {
                       Navigation.intentWithData(
                         context,
@@ -99,4 +96,3 @@ class _NowPlayingScreenState extends State<NowPlayingScreen> {
     );
   }
 }
-

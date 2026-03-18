@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:dio/dio.dart';
-import 'package:shared/shared.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared/common.dart';
 
 import 'tv_popular_event.dart';
 import 'tv_popular_state.dart';
@@ -19,7 +19,9 @@ class TvPopularBloc extends Bloc<TvPopularEvent, TvPopularState> {
     try {
       emit(TvPopularLoading());
       var movies = await repository.getTvPopular(
-          ApiConstant.apiKey, ApiConstant.language);
+        ApiConstant.apiKey,
+        ApiConstant.language,
+      );
       if (movies.results.isEmpty) {
         emit(TvPopularNoData(AppConstant.noData));
       } else {

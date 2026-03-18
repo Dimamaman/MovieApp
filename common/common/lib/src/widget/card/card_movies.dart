@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 class CardMovies extends StatelessWidget {
   final String? image;
@@ -11,15 +11,16 @@ class CardMovies extends StatelessWidget {
   final String? overview;
   final VoidCallback? onTap;
 
-  const CardMovies(
-      {super.key,
-      this.image,
-      this.vote,
-      this.title,
-      this.releaseDate,
-      this.genre,
-      this.overview,
-      this.onTap});
+  const CardMovies({
+    super.key,
+    this.image,
+    this.vote,
+    this.title,
+    this.releaseDate,
+    this.genre,
+    this.overview,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,12 +52,8 @@ class CardMovies extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          CircleProgress(
-                            vote: vote,
-                          ),
-                          SizedBox(
-                            width: Sizes.dp10(context),
-                          ),
+                          CircleProgress(vote: vote),
+                          SizedBox(width: Sizes.dp10(context)),
                           Expanded(
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
@@ -78,21 +75,15 @@ class CardMovies extends StatelessWidget {
                                 ),
                               ],
                             ),
-                          )
+                          ),
                         ],
                       ),
-                      SizedBox(
-                        height: Sizes.dp10(context),
-                      ),
+                      SizedBox(height: Sizes.dp10(context)),
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: genre ?? [],
-                        ),
+                        child: Row(children: genre ?? []),
                       ),
-                      SizedBox(
-                        height: Sizes.dp10(context),
-                      ),
+                      SizedBox(height: Sizes.dp10(context)),
                       Text(
                         overview ?? '',
                         softWrap: true,
@@ -102,7 +93,7 @@ class CardMovies extends StatelessWidget {
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

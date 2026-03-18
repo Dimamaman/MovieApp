@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 class ChairConstant {
   static Widget grey(BuildContext context) {
@@ -17,9 +17,7 @@ class ChairConstant {
     return ClipRRect(
       borderRadius: BorderRadius.circular(Sizes.dp6(context)),
       child: Container(
-        decoration: BoxDecoration(
-          color: Colors.red[900],
-        ),
+        decoration: BoxDecoration(color: Colors.red[900]),
         child: SvgPicture.asset(ImagesAssets.chairLight),
       ),
     );

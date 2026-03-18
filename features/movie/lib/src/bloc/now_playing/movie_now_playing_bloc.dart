@@ -1,15 +1,17 @@
 import 'package:core/core.dart';
 import 'package:dio/dio.dart';
-import 'package:shared/shared.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared/common.dart';
 
 import 'movie_now_playing_event.dart';
 import 'movie_now_playing_state.dart';
 
-class MovieNowPlayingBloc extends Bloc<MovieNowPlayingEvent, MovieNowPlayingState> {
+class MovieNowPlayingBloc
+    extends Bloc<MovieNowPlayingEvent, MovieNowPlayingState> {
   final Repository repository;
 
-  MovieNowPlayingBloc({required this.repository}) : super(InitialMovieNowPlaying()) {
+  MovieNowPlayingBloc({required this.repository})
+    : super(InitialMovieNowPlaying()) {
     on<LoadMovieNowPlaying>((event, emit) async {
       await _loadNowPlaying(emit);
     });
@@ -19,7 +21,9 @@ class MovieNowPlayingBloc extends Bloc<MovieNowPlayingEvent, MovieNowPlayingStat
     try {
       emit(MovieNowPlayingLoading());
       var movies = await repository.getMovieNowPlaying(
-          ApiConstant.apiKey, ApiConstant.language);
+        ApiConstant.apiKey,
+        ApiConstant.language,
+      );
       if (movies.results.isEmpty) {
         emit(MovieNowPlayingNoData(AppConstant.noData));
       } else {

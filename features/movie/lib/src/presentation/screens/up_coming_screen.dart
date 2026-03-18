@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 import '../../../feature_movie.dart';
 
@@ -36,10 +36,7 @@ class _UpComingScreenState extends State<UpComingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Up Coming Movie'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('Up Coming Movie'), centerTitle: true),
       body: LiquidPullToRefresh(
         onRefresh: _refresh,
         showChildOpacityTransition: false,
@@ -59,10 +56,7 @@ class _UpComingScreenState extends State<UpComingScreen> {
                     vote: movie.ratingText,
                     releaseDate: movie.releaseDate,
                     overview: movie.overview,
-                    genre: movie.genreIds
-                        .take(3)
-                        .map(buildGenreChip)
-                        .toList(),
+                    genre: movie.genreIds.take(3).map(buildGenreChip).toList(),
                     onTap: () {
                       Navigation.intentWithData(
                         context,
@@ -99,4 +93,3 @@ class _UpComingScreenState extends State<UpComingScreen> {
     );
   }
 }
-

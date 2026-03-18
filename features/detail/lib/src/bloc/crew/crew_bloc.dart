@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:dio/dio.dart';
-import 'package:shared/shared.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared/common.dart';
 
 import 'crew_event.dart';
 import 'crew_state.dart';
@@ -69,4 +69,3 @@ class CrewBloc extends Bloc<CrewEvent, CrewState> {
     }
   }
 }
-

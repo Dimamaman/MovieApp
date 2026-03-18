@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 class DateWidget extends StatefulWidget {
   const DateWidget({super.key});
@@ -23,21 +23,27 @@ class _DateWidgetState extends State<DateWidget> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     for (int i = 0; i < 7; i++) {
-      _dateSelectorAcList.add(AnimationController(
-          vsync: this, duration: Duration(milliseconds: 500)));
-      _dateSelectorTweenList.add(Tween<double>(begin: 1000, end: 0)
-          .chain(CurveTween(curve: Curves.easeOutCubic))
-          .animate(_dateSelectorAcList[i]));
+      _dateSelectorAcList.add(
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500)),
+      );
+      _dateSelectorTweenList.add(
+        Tween<double>(begin: 1000, end: 0)
+            .chain(CurveTween(curve: Curves.easeOutCubic))
+            .animate(_dateSelectorAcList[i]),
+      );
       Future.delayed(Duration(milliseconds: i * 50 + 170), () {
         _dateSelectorAcList[i].forward();
       });
     }
 
-    _dateBackgroundAc =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 700));
-    _dateBackgroundTween = Tween<double>(begin: 1000, end: 0)
-        .chain(CurveTween(curve: Curves.easeOutCubic))
-        .animate(_dateBackgroundAc);
+    _dateBackgroundAc = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 700),
+    );
+    _dateBackgroundTween = Tween<double>(
+      begin: 1000,
+      end: 0,
+    ).chain(CurveTween(curve: Curves.easeOutCubic)).animate(_dateBackgroundAc);
     Future.delayed(Duration(milliseconds: 150), () {
       _dateBackgroundAc.forward();
     });
@@ -96,8 +102,9 @@ class _DateWidgetState extends State<DateWidget> with TickerProviderStateMixin {
             child: Container(
               decoration: BoxDecoration(
                 color: _backgroundColor(),
-                borderRadius:
-                    BorderRadius.all(Radius.circular(Sizes.dp10(context))),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(Sizes.dp10(context)),
+                ),
               ),
             ),
           ),
@@ -133,9 +140,7 @@ class _DateWidgetState extends State<DateWidget> with TickerProviderStateMixin {
                       color: _dateIndexSelected == index
                           ? ColorPalettes.darkAccent
                           : Colors.transparent,
-                      borderRadius: BorderRadius.circular(
-                        Sizes.dp5(context),
-                      ),
+                      borderRadius: BorderRadius.circular(Sizes.dp5(context)),
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -156,7 +161,7 @@ class _DateWidgetState extends State<DateWidget> with TickerProviderStateMixin {
                             height: 1,
                             color: _textDateColor(index),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),

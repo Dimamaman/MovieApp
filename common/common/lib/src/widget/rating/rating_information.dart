@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 class RatingInformation extends StatelessWidget {
   final double? rating;
@@ -14,16 +14,16 @@ class RatingInformation extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(ratingValue.toString(),
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              color: theme.colorScheme.secondary,
-              fontSize: Sizes.dp16(context),
-            )),
-        SizedBox(height: Sizes.dp4(context)),
         Text(
-          'Ratings',
+          ratingValue.toString(),
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            color: theme.colorScheme.secondary,
+            fontSize: Sizes.dp16(context),
+          ),
         ),
+        SizedBox(height: Sizes.dp4(context)),
+        Text('Ratings'),
       ],
     );
 
@@ -34,10 +34,10 @@ class RatingInformation extends StatelessWidget {
         buildRatingBar(theme, context, ratingValue),
         Padding(
           padding: EdgeInsets.only(
-              top: Sizes.dp4(context), left: Sizes.dp4(context)),
-          child: Text(
-            'Grade now',
+            top: Sizes.dp4(context),
+            left: Sizes.dp4(context),
           ),
+          child: Text('Grade now'),
         ),
       ],
     );
@@ -56,12 +56,10 @@ class RatingInformation extends StatelessWidget {
 Widget buildRatingBar(ThemeData theme, BuildContext context, double rating) {
   var stars = <Widget>[];
   for (var i = 1; i <= 5; i++) {
-    var color = i <= rating / 2 ? theme.colorScheme.secondary : ColorPalettes.grey;
-    var star = Icon(
-      Icons.star,
-      color: color,
-      size: Sizes.dp18(context),
-    );
+    var color = i <= rating / 2
+        ? theme.colorScheme.secondary
+        : ColorPalettes.grey;
+    var star = Icon(Icons.star, color: color, size: Sizes.dp18(context));
     stars.add(star);
   }
   return Row(mainAxisSize: MainAxisSize.min, children: stars);

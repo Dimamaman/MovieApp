@@ -1,7 +1,7 @@
 import 'dart:io';
 
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
 
 class AboutScreen extends StatelessWidget {
   static const routeName = '/about';
@@ -19,9 +19,10 @@ class AboutScreen extends StatelessWidget {
             height: Sizes.width(context),
             child: Padding(
               padding: EdgeInsets.only(
-                  left: Sizes.dp20(context),
-                  right: Sizes.dp20(context),
-                  top: Sizes.width(context) / 4),
+                left: Sizes.dp20(context),
+                right: Sizes.dp20(context),
+                top: Sizes.width(context) / 4,
+              ),
               child: Column(
                 children: <Widget>[
                   Row(
@@ -45,14 +46,16 @@ class AboutScreen extends StatelessWidget {
                             Text(
                               "R Rifa Fauzi Komara",
                               style: TextStyle(
-                                  fontSize: Sizes.dp28(context),
-                                  color: ColorPalettes.lightBG,
-                                  fontWeight: FontWeight.bold),
+                                fontSize: Sizes.dp28(context),
+                                color: ColorPalettes.lightBG,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             SizedBox(height: Sizes.dp5(context)),
                             GestureDetector(
                               onTap: () => Navigation.launchURL(
-                                  UrlConstant.urlInstagram),
+                                UrlConstant.urlInstagram,
+                              ),
                               child: Row(
                                 children: <Widget>[
                                   Image.asset(
@@ -73,12 +76,10 @@ class AboutScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                      )
+                      ),
                     ],
                   ),
-                  SizedBox(
-                    height: Sizes.dp30(context),
-                  ),
+                  SizedBox(height: Sizes.dp30(context)),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
@@ -145,8 +146,9 @@ class AboutScreen extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.only(
-                          top: Sizes.dp30(context),
-                          bottom: Sizes.dp20(context)),
+                        top: Sizes.dp30(context),
+                        bottom: Sizes.dp20(context),
+                      ),
                       child: Text(
                         "My Portfolio",
                         style: TextStyle(
@@ -181,7 +183,8 @@ class AboutScreen extends StatelessWidget {
             child: IconButton(
               iconSize: Sizes.dp25(context),
               icon: Icon(
-                  Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios),
+                Platform.isAndroid ? Icons.arrow_back : Icons.arrow_back_ios,
+              ),
               onPressed: () => Navigator.pop(context),
             ),
           ),

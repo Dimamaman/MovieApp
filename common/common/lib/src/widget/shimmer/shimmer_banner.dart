@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ShimmerBanner extends StatelessWidget {

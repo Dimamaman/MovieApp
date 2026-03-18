@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 import 'package:shared/src/common/utils/chair_constant.dart';
 
 class CinemaWidget extends StatefulWidget {
@@ -26,7 +26,7 @@ class _CinemaWidgetState extends State<CinemaWidget>
     [1, 1, 2, 2, 2, 2, 2],
     [0, 2, 1, 1, 1, 2, 0],
     [2, 2, 2, 2, 2, 2, 2],
-    [0, 3, 3, 2, 1, 1, 0]
+    [0, 3, 3, 2, 1, 1, 0],
   ];
 
   @override
@@ -34,19 +34,25 @@ class _CinemaWidgetState extends State<CinemaWidget>
     super.initState();
 
     _cinemaScreenAc = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 2000));
-    _cinemaScreenTween = Tween<double>(begin: 0, end: 1)
-        .chain(CurveTween(curve: Curves.easeInOutQuart))
-        .animate(_cinemaScreenAc);
+      vsync: this,
+      duration: Duration(milliseconds: 2000),
+    );
+    _cinemaScreenTween = Tween<double>(
+      begin: 0,
+      end: 1,
+    ).chain(CurveTween(curve: Curves.easeInOutQuart)).animate(_cinemaScreenAc);
     Future.delayed(Duration(milliseconds: 800), () {
       _cinemaScreenAc.forward();
     });
 
     _cinemaChairAc = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1600));
-    _cinemaChairTween = Tween<double>(begin: -1, end: 0)
-        .chain(CurveTween(curve: Curves.ease))
-        .animate(_cinemaChairAc);
+      vsync: this,
+      duration: Duration(milliseconds: 1600),
+    );
+    _cinemaChairTween = Tween<double>(
+      begin: -1,
+      end: 0,
+    ).chain(CurveTween(curve: Curves.ease)).animate(_cinemaChairAc);
     Future.delayed(Duration(milliseconds: 1200), () {
       _cinemaChairAc.forward();
     });
@@ -94,14 +100,13 @@ class _CinemaWidgetState extends State<CinemaWidget>
           builder: (ctx, child) {
             return Transform.translate(
               offset: Offset(0, _cinemaChairTween.value * 100),
-              child:
-                  Opacity(opacity: _cinemaChairTween.value + 1, child: child),
+              child: Opacity(
+                opacity: _cinemaChairTween.value + 1,
+                child: child,
+              ),
             );
           },
-          child: SizedBox(
-            width: Sizes.width(context),
-            child: _chairList(),
-          ),
+          child: SizedBox(width: Sizes.width(context), child: _chairList()),
         ),
       ],
     );
@@ -118,7 +123,8 @@ class _CinemaWidgetState extends State<CinemaWidget>
                 for (int x = 0; x < 9; x++)
                   Expanded(
                     flex: x == 0 || x == 8 ? 2 : 1,
-                    child: x == 0 ||
+                    child:
+                        x == 0 ||
                             x == 8 ||
                             (i == 0 && x == 1) ||
                             (i == 0 && x == 7) ||
@@ -145,10 +151,10 @@ class _CinemaWidgetState extends State<CinemaWidget>
                               child: _chairStatus[i][x - 1] == 1
                                   ? ChairConstant.white(context, _isDarkTheme)
                                   : _chairStatus[i][x - 1] == 2
-                                      ? ChairConstant.grey(context)
-                                      : _chairStatus[i][x - 1] == 3
-                                          ? ChairConstant.red(context)
-                                          : ChairConstant.orange(context),
+                                  ? ChairConstant.grey(context)
+                                  : _chairStatus[i][x - 1] == 3
+                                  ? ChairConstant.red(context)
+                                  : ChairConstant.orange(context),
                             ),
                           ),
                   ),

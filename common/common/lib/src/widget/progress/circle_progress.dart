@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 class CircleProgress extends StatelessWidget {
   final String? vote;
@@ -20,9 +20,7 @@ class CircleProgress extends StatelessWidget {
               height: Sizes.width(context) / 10,
               decoration: BoxDecoration(
                 color: ColorPalettes.blueGrey,
-                borderRadius: BorderRadius.circular(
-                  Sizes.dp20(context),
-                ),
+                borderRadius: BorderRadius.circular(Sizes.dp20(context)),
               ),
             ),
           ),
@@ -33,9 +31,7 @@ class CircleProgress extends StatelessWidget {
               child: CircularProgressIndicator(
                 strokeWidth: 3.0,
                 valueColor: AlwaysStoppedAnimation<Color>(
-                  ColorPalettes.getColorCircleProgress(
-                    double.parse(voteValue),
-                  ),
+                  ColorPalettes.getColorCircleProgress(double.parse(voteValue)),
                 ),
                 backgroundColor: ColorPalettes.grey,
                 value: double.parse(voteValue) / 10.0,
@@ -57,7 +53,7 @@ class CircleProgress extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

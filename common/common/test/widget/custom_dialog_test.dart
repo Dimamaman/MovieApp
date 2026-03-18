@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 void main() {
   group('CustomDialog', () {
@@ -67,9 +67,9 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byWidgetPredicate(
-        (w) => w is Radio<bool> && w.value == true,
-      ));
+      await tester.tap(
+        find.byWidgetPredicate((w) => w is Radio<bool> && w.value == true),
+      );
       await tester.pump();
 
       expect(selectedValue, isTrue);

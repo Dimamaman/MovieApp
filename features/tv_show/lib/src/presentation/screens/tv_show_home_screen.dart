@@ -1,10 +1,10 @@
 import 'dart:async';
 
+import 'package:feature_movie/feature_movie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'package:feature_movie/feature_movie.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 import '../../../feature_tv_show.dart';
 
@@ -74,17 +74,11 @@ class _TvShowScreenState extends State<TvShowScreen> {
         child: Column(
           children: <Widget>[
             _buildBanner(context),
-            SizedBox(
-              height: Sizes.dp12(context),
-            ),
+            SizedBox(height: Sizes.dp12(context)),
             _buildAiringToday(context),
-            SizedBox(
-              height: Sizes.dp12(context),
-            ),
+            SizedBox(height: Sizes.dp12(context)),
             _buildPopular(context),
-            SizedBox(
-              height: Sizes.dp12(context),
-            ),
+            SizedBox(height: Sizes.dp12(context)),
           ],
         ),
       ),
@@ -150,10 +144,7 @@ class _TvShowScreenState extends State<TvShowScreen> {
               ),
               Spacer(),
               IconButton(
-                icon: Icon(
-                  Icons.arrow_forward_ios,
-                  size: Sizes.dp16(context),
-                ),
+                icon: Icon(Icons.arrow_forward_ios, size: Sizes.dp16(context)),
                 onPressed: () {
                   Navigation.intent(context, TvShowRoutes.airingToday);
                 },
@@ -237,10 +228,7 @@ class _TvShowScreenState extends State<TvShowScreen> {
               ),
               Spacer(),
               IconButton(
-                icon: Icon(
-                  Icons.arrow_forward_ios,
-                  size: Sizes.dp16(context),
-                ),
+                icon: Icon(Icons.arrow_forward_ios, size: Sizes.dp16(context)),
                 onPressed: () {
                   Navigation.intent(context, TvShowRoutes.popular);
                 },

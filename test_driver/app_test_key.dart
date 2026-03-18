@@ -1,7 +1,7 @@
 // import 'package:flutter_driver/flutter_driver.dart';
 //
 // /**
-//  * Please don't use "package:shared/shared.dart" imported
+//  * Please don't use "package:shared/common.dart" imported
 //  * You can check the reason and the issue from this:
 //  * https://github.com/flutter/flutter/issues/56192#issuecomment-624101352
 //  */

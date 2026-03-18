@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 void main() {
   group('CustomErrorWidget', () {
     testWidgets('displays error message', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: Scaffold(body: CustomErrorWidget(message: 'Something went wrong')),
+          home: Scaffold(
+            body: CustomErrorWidget(message: 'Something went wrong'),
+          ),
         ),
       );
 
@@ -16,9 +18,7 @@ void main() {
 
     testWidgets('displays empty string when message is null', (tester) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(body: CustomErrorWidget()),
-        ),
+        const MaterialApp(home: Scaffold(body: CustomErrorWidget())),
       );
 
       expect(find.text(''), findsOneWidget);
@@ -26,8 +26,9 @@ void main() {
   });
 
   group('NoInternetWidget', () {
-    testWidgets('displays no internet message and reload button',
-        (tester) async {
+    testWidgets('displays no internet message and reload button', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(

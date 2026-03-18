@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:core/src/presentation/model/trailer_ui.dart';
+import 'package:shared/common.dart';
 
 part 'trailer.g.dart';
 

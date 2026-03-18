@@ -14,7 +14,7 @@ dependencies:
     path: core/core
   dependencies:
     path: libraries/dependencies
-  shared:
+  common:
     path: common/common
   feature_movie:
     path: features/movie

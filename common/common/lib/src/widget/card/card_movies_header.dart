@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 class CardMoviesHeader extends StatelessWidget {
   final bool? isFromBanner;
@@ -10,15 +10,16 @@ class CardMoviesHeader extends StatelessWidget {
   final String? imagePoster;
   final double? rating;
 
-  const CardMoviesHeader(
-      {super.key,
-      this.isFromBanner,
-      this.idMovie,
-      this.genre,
-      this.title,
-      this.imageBanner,
-      this.imagePoster,
-      this.rating});
+  const CardMoviesHeader({
+    super.key,
+    this.isFromBanner,
+    this.idMovie,
+    this.genre,
+    this.title,
+    this.imageBanner,
+    this.imagePoster,
+    this.rating,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,17 +34,13 @@ class CardMoviesHeader extends StatelessWidget {
           ),
         ),
         SizedBox(height: Sizes.dp8(context)),
-        RatingInformation(
-          rating: rating,
-        ),
+        RatingInformation(rating: rating),
         SizedBox(height: Sizes.dp12(context)),
         Padding(
           padding: EdgeInsets.only(right: Sizes.dp8(context)),
           child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            child: Row(
-              children: genre ?? [],
-            ),
+            child: Row(children: genre ?? []),
           ),
         ),
       ],
@@ -64,11 +61,10 @@ class CardMoviesHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Hero(
-                tag: (isFromBanner ?? false) ? (idMovie ?? 0) : (imagePoster ?? ''),
-                child: Poster(
-                  imagePoster ?? '',
-                  Sizes.width(context) / 2,
-                ),
+                tag: (isFromBanner ?? false)
+                    ? (idMovie ?? 0)
+                    : (imagePoster ?? ''),
+                child: Poster(imagePoster ?? '', Sizes.width(context) / 2),
               ),
               SizedBox(width: Sizes.dp16(context)),
               Expanded(child: movieInformation),

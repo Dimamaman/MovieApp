@@ -1,10 +1,9 @@
+import 'package:common/common.dart';
 import 'package:feature_setting/feature_setting.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moviecatalogue/ui/about/about_screen.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:shared/shared.dart';
 
 class SettingScreen extends StatelessWidget {
   static const routeName = '/theme';
@@ -17,10 +16,7 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text('Settings'), centerTitle: true),
       body: Padding(
         padding: EdgeInsets.all(Sizes.dp10(context)),
         child: Column(
@@ -65,7 +61,9 @@ class SettingScreen extends StatelessWidget {
                                   ? state.isDarkTheme
                                   : false,
                               onChanged: (value) {
-                                context.read<ThemeBloc>().add(ThemeChanged(isDarkTheme: value ?? false));
+                                context.read<ThemeBloc>().add(
+                                  ThemeChanged(isDarkTheme: value ?? false),
+                                );
                               },
                             );
                           },

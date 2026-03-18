@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:dio/dio.dart';
-import 'package:shared/shared.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared/common.dart';
 
 import 'discover_movie_event.dart';
 import 'discover_movie_state.dart';
@@ -9,7 +9,8 @@ import 'discover_movie_state.dart';
 class DiscoverMovieBloc extends Bloc<DiscoverMovieEvent, DiscoverMovieState> {
   final Repository repository;
 
-  DiscoverMovieBloc({required this.repository}) : super(InitialDiscoverMovie()) {
+  DiscoverMovieBloc({required this.repository})
+    : super(InitialDiscoverMovie()) {
     on<LoadDiscoverMovie>((event, emit) async {
       await _loadDiscoverMovie(emit);
     });
@@ -19,7 +20,9 @@ class DiscoverMovieBloc extends Bloc<DiscoverMovieEvent, DiscoverMovieState> {
     try {
       emit(DiscoverMovieLoading());
       var movies = await repository.getDiscoverMovie(
-          ApiConstant.apiKey, ApiConstant.language);
+        ApiConstant.apiKey,
+        ApiConstant.language,
+      );
       if (movies.results.isEmpty) {
         emit(DiscoverMovieNoData(AppConstant.noData));
       } else {

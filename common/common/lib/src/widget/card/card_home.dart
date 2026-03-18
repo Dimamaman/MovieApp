@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 class CardHome extends StatelessWidget {
   final String? image, title;
@@ -19,12 +19,14 @@ class CardHome extends StatelessWidget {
         onTap: onTap,
         child: Card(
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(Sizes.dp10(context))),
+            borderRadius: BorderRadius.circular(Sizes.dp10(context)),
+          ),
           child: Stack(
             children: <Widget>[
               ClipRRect(
-                borderRadius:
-                    BorderRadius.all(Radius.circular(Sizes.dp10(context))),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(Sizes.dp10(context)),
+                ),
                 child: CachedNetworkImage(
                   imageUrl: (image ?? '').imageOriginal,
                   height: Sizes.width(context) / 1.8,
@@ -38,8 +40,9 @@ class CardHome extends StatelessWidget {
                 height: Sizes.width(context) / 1.8,
                 width: Sizes.width(context) / 2.5,
                 decoration: BoxDecoration(
-                  borderRadius:
-                      BorderRadius.all(Radius.circular(Sizes.dp10(context))),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(Sizes.dp10(context)),
+                  ),
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
@@ -56,11 +59,14 @@ class CardHome extends StatelessWidget {
                 bottom: 0,
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(Sizes.dp10(context))),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(Sizes.dp10(context)),
+                    ),
                   ),
                   padding: EdgeInsets.only(
-                      left: Sizes.dp6(context), bottom: Sizes.dp5(context)),
+                    left: Sizes.dp6(context),
+                    bottom: Sizes.dp5(context),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -70,11 +76,12 @@ class CardHome extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: TextStyle(
-                            fontSize: Sizes.dp14(context),
-                            fontWeight: FontWeight.bold,
-                            color: !isDarkTheme
-                                ? ColorPalettes.darkBG
-                                : ColorPalettes.white),
+                          fontSize: Sizes.dp14(context),
+                          fontWeight: FontWeight.bold,
+                          color: !isDarkTheme
+                              ? ColorPalettes.darkBG
+                              : ColorPalettes.white,
+                        ),
                       ),
                       SizedBox(height: Sizes.dp4(context)),
                       buildRatingBar(theme, context, rating ?? 0.0),
@@ -82,7 +89,7 @@ class CardHome extends StatelessWidget {
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

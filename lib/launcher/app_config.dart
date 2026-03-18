@@ -1,9 +1,6 @@
-import 'package:shared/shared.dart';
+import 'package:common/common.dart';
 
-enum Flavor {
-  DEVELOPMENT,
-  RELEASE,
-}
+enum Flavor { DEVELOPMENT, RELEASE }
 
 class Config {
   static Flavor appFlavor = Flavor.DEVELOPMENT;

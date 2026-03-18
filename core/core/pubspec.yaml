@@ -16,7 +16,7 @@ dependencies:
   # This is our modular
   dependencies:
     path: ../../libraries/dependencies
-  shared:
+  common:
     path: ../../common/common
 
 dev_dependencies:

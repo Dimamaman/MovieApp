@@ -14,3 +14,4 @@ class CrewUI extends Equatable {
   @override
   List<Object> get props => [name, character, profileUrl];
 }
+

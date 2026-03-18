@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 void main() {
   group('StringExtension.imageOriginal', () {
@@ -13,10 +13,7 @@ void main() {
 
     test('works with empty string', () {
       const path = '';
-      expect(
-        path.imageOriginal,
-        'https://image.tmdb.org/t/p/original',
-      );
+      expect(path.imageOriginal, 'https://image.tmdb.org/t/p/original');
     });
 
     test('works with backdrop path', () {

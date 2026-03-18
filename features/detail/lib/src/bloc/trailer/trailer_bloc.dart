@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:dio/dio.dart';
-import 'package:shared/shared.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared/common.dart';
 
 import 'trailer_event.dart';
 import 'trailer_state.dart';
@@ -75,4 +75,3 @@ class TrailerBloc extends Bloc<TrailerEvent, TrailerState> {
     }
   }
 }
-

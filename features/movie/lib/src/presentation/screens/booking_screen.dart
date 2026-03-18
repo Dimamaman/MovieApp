@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 class BookingScreen extends StatelessWidget {
   const BookingScreen({super.key, required this.arguments});
@@ -11,8 +11,9 @@ class BookingScreen extends StatelessWidget {
     final themeData = Theme.of(context);
     final isDarkTheme = themeData.appBarTheme.backgroundColor == null;
     return Scaffold(
-      backgroundColor:
-          !isDarkTheme ? ColorPalettes.darkPrimary : ColorPalettes.white,
+      backgroundColor: !isDarkTheme
+          ? ColorPalettes.darkPrimary
+          : ColorPalettes.white,
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
@@ -39,8 +40,9 @@ class BookingScreen extends StatelessWidget {
                       content: 'Thanks for your movie ticket order',
                       title: 'Payment Successful!',
                       submit: () {
-                        Navigator.of(context)
-                            .popUntil((route) => route.isFirst);
+                        Navigator.of(
+                          context,
+                        ).popUntil((route) => route.isFirst);
                       },
                     );
                   },

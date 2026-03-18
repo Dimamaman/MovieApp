@@ -1,8 +1,7 @@
+import 'package:core/src/network/model/genres.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:core/src/network/model/genres.dart';
-import 'package:core/src/presentation/model/movies_ui.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 part 'movies.g.dart';
 
@@ -57,32 +56,33 @@ class Movies extends Equatable {
   final String tvRelease;
 
   Movies(
-      this.id,
-      this.title,
-      this.overview,
-      this.releaseDate,
-      this.genreIds,
-      this.voteAverage,
-      this.popularity,
-      this.posterPath,
-      this.backdropPath,
-      this.tvName,
-      this.tvRelease);
+    this.id,
+    this.title,
+    this.overview,
+    this.releaseDate,
+    this.genreIds,
+    this.voteAverage,
+    this.popularity,
+    this.posterPath,
+    this.backdropPath,
+    this.tvName,
+    this.tvRelease,
+  );
 
   @override
   List<Object> get props => [
-        id,
-        title,
-        overview,
-        releaseDate,
-        genreIds,
-        voteAverage,
-        popularity,
-        posterPath,
-        backdropPath,
-        tvName,
-        tvRelease
-      ];
+    id,
+    title,
+    overview,
+    releaseDate,
+    genreIds,
+    voteAverage,
+    popularity,
+    posterPath,
+    backdropPath,
+    tvName,
+    tvRelease,
+  ];
 
   factory Movies.fromJson(Map<String, dynamic> json) => _$MoviesFromJson(json);
 
@@ -92,8 +92,10 @@ class Movies extends Equatable {
     final name = isMovie ? title : tvName;
     final date = isMovie ? releaseDate : tvRelease;
     final year = date.length >= 4 ? date.substring(0, 4) : '-';
-    final genreNames =
-        genreIds.map((id) => Genres.genres[id] ?? '').where((g) => g.isNotEmpty).toList();
+    final genreNames = genreIds
+        .map((id) => Genres.genres[id] ?? '')
+        .where((g) => g.isNotEmpty)
+        .toList();
 
     return MoviesUI(
       id: id,

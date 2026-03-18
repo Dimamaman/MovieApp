@@ -1,3 +1,4 @@
+import 'package:common/common.dart';
 import 'package:feature_detail/feature_detail.dart';
 import 'package:feature_movie/feature_movie.dart';
 import 'package:feature_setting/feature_setting.dart';
@@ -10,7 +11,6 @@ import 'package:moviecatalogue/ui/dashboard/dashboard_screen.dart';
 import 'package:moviecatalogue/ui/home/discover_screen.dart';
 import 'package:moviecatalogue/ui/setting/setting_screen.dart';
 import 'package:moviecatalogue/ui/splash/splash_screen.dart';
-import 'package:shared/shared.dart';
 
 import 'app_config.dart';
 

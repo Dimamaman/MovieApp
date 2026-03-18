@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import 'package:shared/common.dart';
 
 class ScreenArguments {
   final MoviesUI movies;

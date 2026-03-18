@@ -51,3 +51,4 @@ class MoviesUI extends Equatable {
         isMovie,
       ];
 }
+

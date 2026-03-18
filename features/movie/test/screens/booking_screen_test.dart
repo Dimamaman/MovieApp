@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 import 'package:feature_movie/feature_movie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 void main() {
   late MoviesUI tMovieUI;
@@ -29,9 +29,7 @@ void main() {
 
   Future<void> pumpBookingScreen(WidgetTester tester) async {
     await tester.pumpWidget(
-      MaterialApp(
-        home: BookingScreen(arguments: tArguments),
-      ),
+      MaterialApp(home: BookingScreen(arguments: tArguments)),
     );
 
     await tester.pump(const Duration(seconds: 1));
@@ -75,17 +73,13 @@ void main() {
 
       await pumpBookingScreen(tester);
 
-      final button =
-          tester.widget<CustomButton>(find.byType(CustomButton));
+      final button = tester.widget<CustomButton>(find.byType(CustomButton));
       button.onPressed?.call();
       await tester.pump();
       await tester.pump(const Duration(seconds: 1));
 
       expect(find.text('Payment Successful!'), findsOneWidget);
-      expect(
-        find.text('Thanks for your movie ticket order'),
-        findsOneWidget,
-      );
+      expect(find.text('Thanks for your movie ticket order'), findsOneWidget);
     });
 
     testWidgets('dialog shows Done and Cancel buttons', (tester) async {
@@ -95,8 +89,7 @@ void main() {
 
       await pumpBookingScreen(tester);
 
-      final button =
-          tester.widget<CustomButton>(find.byType(CustomButton));
+      final button = tester.widget<CustomButton>(find.byType(CustomButton));
       button.onPressed?.call();
       await tester.pump();
       await tester.pump(const Duration(seconds: 1));
@@ -112,8 +105,7 @@ void main() {
 
       await pumpBookingScreen(tester);
 
-      final button =
-          tester.widget<CustomButton>(find.byType(CustomButton));
+      final button = tester.widget<CustomButton>(find.byType(CustomButton));
       button.onPressed?.call();
       await tester.pump();
       await tester.pump(const Duration(seconds: 1));

@@ -1,10 +1,10 @@
 import 'dart:async';
 
+import 'package:feature_movie/feature_movie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'package:feature_movie/feature_movie.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 import '../../../feature_tv_show.dart';
 
@@ -37,10 +37,7 @@ class _TvPopularScreenState extends State<TvPopularScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Popular'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text('Popular'), centerTitle: true),
       body: LiquidPullToRefresh(
         onRefresh: _refresh,
         showChildOpacityTransition: false,

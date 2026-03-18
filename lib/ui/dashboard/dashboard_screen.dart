@@ -1,9 +1,9 @@
+import 'package:common/common.dart';
 import 'package:feature_movie/feature_movie.dart';
 import 'package:feature_tv_show/feature_tv_show.dart';
 import 'package:flutter/material.dart';
 import 'package:moviecatalogue/ui/home/discover_screen.dart';
 import 'package:moviecatalogue/ui/menu/menu.dart';
-import 'package:shared/shared.dart';
 
 class DashBoardScreen extends StatefulWidget {
   static const routeName = '/';
@@ -73,10 +73,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigation.intent(context, DiscoverScreen.routeName),
-        child: Icon(
-          Icons.location_searching,
-          color: ColorPalettes.white,
-        ),
+        child: Icon(Icons.location_searching, color: ColorPalettes.white),
       ),
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
@@ -85,14 +82,12 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              color:
-                  _page == 0 ? ColorPalettes.darkAccent : ColorPalettes.grey,
+              color: _page == 0 ? ColorPalettes.darkAccent : ColorPalettes.grey,
               icon: Icon(Icons.movie_creation),
               onPressed: () => _navigationTapped(0),
             ),
             IconButton(
-              color:
-                  _page == 1 ? ColorPalettes.darkAccent : ColorPalettes.grey,
+              color: _page == 1 ? ColorPalettes.darkAccent : ColorPalettes.grey,
               icon: Icon(Icons.live_tv),
               onPressed: () => _navigationTapped(1),
             ),

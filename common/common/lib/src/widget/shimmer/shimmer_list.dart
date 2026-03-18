@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ShimmerList extends StatelessWidget {
@@ -7,7 +7,10 @@ class ShimmerList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: Sizes.dp16(context), vertical: Sizes.dp16(context)),
+      padding: EdgeInsets.symmetric(
+        horizontal: Sizes.dp16(context),
+        vertical: Sizes.dp16(context),
+      ),
       child: Shimmer.fromColors(
         baseColor: ColorPalettes.greyBg,
         highlightColor: ColorPalettes.white,
@@ -41,21 +44,18 @@ class ShimmerList extends StatelessWidget {
                                 width: Sizes.width(context) / 10,
                                 color: ColorPalettes.greyBg,
                               ),
-                              SizedBox(
-                                width: Sizes.dp10(context),
-                              ),
+                              SizedBox(width: Sizes.dp10(context)),
                               Expanded(
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
                                   children: <Widget>[
                                     Container(
                                       width: double.infinity,
                                       height: Sizes.dp16(context),
                                       color: ColorPalettes.greyBg,
                                     ),
-                                    SizedBox(
-                                      height: Sizes.dp12(context),
-                                    ),
+                                    SizedBox(height: Sizes.dp12(context)),
                                     Container(
                                       width: double.infinity,
                                       height: Sizes.dp12(context),
@@ -67,9 +67,7 @@ class ShimmerList extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: Sizes.dp10(context),
-                        ),
+                        SizedBox(height: Sizes.dp10(context)),
                         Row(
                           mainAxisSize: MainAxisSize.max,
                           children: <Widget>[
@@ -78,9 +76,7 @@ class ShimmerList extends StatelessWidget {
                               width: Sizes.width(context) / 7,
                               color: ColorPalettes.greyBg,
                             ),
-                            SizedBox(
-                              width: Sizes.dp10(context),
-                            ),
+                            SizedBox(width: Sizes.dp10(context)),
                             Container(
                               height: Sizes.dp30(context),
                               width: Sizes.width(context) / 7,
@@ -88,53 +84,41 @@ class ShimmerList extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: Sizes.dp10(context),
-                        ),
+                        SizedBox(height: Sizes.dp10(context)),
                         Container(
                           width: double.infinity,
                           height: Sizes.dp12(context),
                           color: ColorPalettes.greyBg,
                         ),
-                        SizedBox(
-                          height: Sizes.dp10(context),
-                        ),
+                        SizedBox(height: Sizes.dp10(context)),
                         Container(
                           width: double.infinity,
                           height: Sizes.dp12(context),
                           color: ColorPalettes.greyBg,
                         ),
-                        SizedBox(
-                          height: Sizes.dp10(context),
-                        ),
+                        SizedBox(height: Sizes.dp10(context)),
                         Container(
                           width: double.infinity,
                           height: Sizes.dp12(context),
                           color: ColorPalettes.greyBg,
                         ),
-                        SizedBox(
-                          height: Sizes.dp10(context),
-                        ),
+                        SizedBox(height: Sizes.dp10(context)),
                         Container(
                           width: double.infinity,
                           height: Sizes.dp12(context),
                           color: ColorPalettes.greyBg,
                         ),
-                        SizedBox(
-                          height: Sizes.dp10(context),
-                        ),
+                        SizedBox(height: Sizes.dp10(context)),
                         Container(
                           width: double.infinity,
                           height: Sizes.dp12(context),
                           color: ColorPalettes.greyBg,
                         ),
-                        SizedBox(
-                          height: Sizes.dp10(context),
-                        ),
+                        SizedBox(height: Sizes.dp10(context)),
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

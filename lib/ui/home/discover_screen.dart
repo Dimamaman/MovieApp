@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:common/common.dart';
+import 'package:feature_movie/feature_movie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:feature_movie/feature_movie.dart';
-import 'package:shared/shared.dart';
 
 class DiscoverScreen extends StatefulWidget {
   static const routeName = '/discover_movie';
@@ -28,10 +28,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
       backgroundColor: ColorPalettes.black,
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.pop(context),
-        child: Icon(
-          Icons.arrow_back,
-          color: ColorPalettes.white,
-        ),
+        child: Icon(Icons.arrow_back, color: ColorPalettes.white),
       ),
       body: BlocBuilder<DiscoverMovieBloc, DiscoverMovieState>(
         builder: (context, state) {
@@ -64,14 +61,15 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                       Container(
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
-                              colors: [
-                                ColorPalettes.black.withValues(alpha: 0.9),
-                                ColorPalettes.black.withValues(alpha: 0.3),
-                                ColorPalettes.black.withValues(alpha: 0.95)
-                              ],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              stops: [0.1, 0.5, 0.9]),
+                            colors: [
+                              ColorPalettes.black.withValues(alpha: 0.9),
+                              ColorPalettes.black.withValues(alpha: 0.3),
+                              ColorPalettes.black.withValues(alpha: 0.95),
+                            ],
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            stops: [0.1, 0.5, 0.9],
+                          ),
                         ),
                       ),
                       Align(
@@ -106,9 +104,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                               Text(
                                 '$position',
                                 style: TextStyle(
-                                    color: ColorPalettes.white,
-                                    fontSize: Sizes.dp25(context),
-                                    fontWeight: FontWeight.bold),
+                                  color: ColorPalettes.white,
+                                  fontSize: Sizes.dp25(context),
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                               Text(
                                 "/${state.result.results.length}",
@@ -117,7 +116,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                   fontSize: Sizes.dp16(context),
                                   fontWeight: FontWeight.bold,
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),

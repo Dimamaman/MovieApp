@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 class TimeWidget extends StatefulWidget {
   const TimeWidget({super.key});
@@ -16,7 +16,7 @@ class _TimeWidgetState extends State<TimeWidget> with TickerProviderStateMixin {
   final _time = [
     ["01.30", 45],
     ["06.30", 45],
-    ["10.30", 45]
+    ["10.30", 45],
   ];
   var _timeIndexSelected = 1;
 
@@ -24,11 +24,14 @@ class _TimeWidgetState extends State<TimeWidget> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     for (int i = 0; i < 3; i++) {
-      _timeSelectorAcList.add(AnimationController(
-          vsync: this, duration: Duration(milliseconds: 500)));
-      _timeSelectorTweenList.add(Tween<double>(begin: 1000, end: 0)
-          .chain(CurveTween(curve: Curves.easeOutCubic))
-          .animate(_timeSelectorAcList[i]));
+      _timeSelectorAcList.add(
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500)),
+      );
+      _timeSelectorTweenList.add(
+        Tween<double>(begin: 1000, end: 0)
+            .chain(CurveTween(curve: Curves.easeOutCubic))
+            .animate(_timeSelectorAcList[i]),
+      );
       Future.delayed(Duration(milliseconds: i * 25 + 100), () {
         _timeSelectorAcList[i].forward();
       });
@@ -126,7 +129,7 @@ class _TimeWidgetState extends State<TimeWidget> with TickerProviderStateMixin {
                     fontWeight: FontWeight.w600,
                     color: _textTimeColor(active),
                   ),
-                )
+                ),
               ],
             ),
           ),

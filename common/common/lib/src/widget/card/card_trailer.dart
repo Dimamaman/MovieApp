@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class CardTrailer extends StatefulWidget {
@@ -8,8 +8,13 @@ class CardTrailer extends StatefulWidget {
   final VoidCallback? onExitFullScreen;
   final int? length;
 
-  const CardTrailer(
-      {super.key, this.title, this.youtube, this.onExitFullScreen, this.length});
+  const CardTrailer({
+    super.key,
+    this.title,
+    this.youtube,
+    this.onExitFullScreen,
+    this.length,
+  });
 
   @override
   State<CardTrailer> createState() => _CardTrailerState();
@@ -49,8 +54,10 @@ class _CardTrailerState extends State<CardTrailer> with WidgetsBindingObserver {
 
   @override
   void didChangeMetrics() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.manual,
+      overlays: SystemUiOverlay.values,
+    );
     widget.onExitFullScreen?.call();
     super.didChangeMetrics();
   }
@@ -64,10 +71,12 @@ class _CardTrailerState extends State<CardTrailer> with WidgetsBindingObserver {
         children: [
           Card(
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(Sizes.dp10(context))),
+              borderRadius: BorderRadius.circular(Sizes.dp10(context)),
+            ),
             child: ClipRRect(
-              borderRadius:
-                  BorderRadius.all(Radius.circular(Sizes.dp10(context))),
+              borderRadius: BorderRadius.all(
+                Radius.circular(Sizes.dp10(context)),
+              ),
               child: YoutubePlayer(
                 controller: _controller,
                 showVideoProgressIndicator: true,
@@ -99,9 +108,7 @@ class _CardTrailerState extends State<CardTrailer> with WidgetsBindingObserver {
           ),
           Visibility(
             visible: trailerLength > 1,
-            child: SizedBox(
-              height: Sizes.dp10(context),
-            ),
+            child: SizedBox(height: Sizes.dp10(context)),
           ),
           Visibility(
             visible: trailerLength > 1,

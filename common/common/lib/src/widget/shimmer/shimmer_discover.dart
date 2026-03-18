@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ShimmerDiscover extends StatelessWidget {
@@ -13,11 +13,7 @@ class ShimmerDiscover extends StatelessWidget {
         width: Sizes.width(context) / 2,
         decoration: BoxDecoration(
           color: ColorPalettes.greyBg,
-          borderRadius: BorderRadius.all(
-            Radius.circular(
-              Sizes.dp10(context),
-            ),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(Sizes.dp10(context))),
         ),
       ),
     );

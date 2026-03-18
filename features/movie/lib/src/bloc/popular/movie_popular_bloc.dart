@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:dio/dio.dart';
-import 'package:shared/shared.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared/common.dart';
 
 import 'movie_popular_event.dart';
 import 'movie_popular_state.dart';
@@ -19,7 +19,9 @@ class MoviePopularBloc extends Bloc<MoviePopularEvent, MoviePopularState> {
     try {
       emit(MoviePopularLoading());
       var movies = await repository.getMoviePopular(
-          ApiConstant.apiKey, ApiConstant.language);
+        ApiConstant.apiKey,
+        ApiConstant.language,
+      );
       if (movies.results.isEmpty) {
         emit(MoviePopularNoData(AppConstant.noData));
       } else {

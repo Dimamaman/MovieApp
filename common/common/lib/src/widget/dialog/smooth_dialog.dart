@@ -1,21 +1,25 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 enum SmoothMode { Lottie, Network, Asset }
 
 class ButtonConfig {
   final String dialogDone, dialogCancel;
-  late Color buttonCancelColor, buttonDoneColor, labelCancelColor, labelDoneColor;
+  late Color buttonCancelColor,
+      buttonDoneColor,
+      labelCancelColor,
+      labelDoneColor;
 
-  ButtonConfig(
-      {this.dialogDone = 'Done',
-      this.dialogCancel = 'Cancel',
-      Color? buttonCancelColor,
-      Color? buttonDoneColor,
-      Color? labelCancelColor,
-      Color? labelDoneColor}) {
+  ButtonConfig({
+    this.dialogDone = 'Done',
+    this.dialogCancel = 'Cancel',
+    Color? buttonCancelColor,
+    Color? buttonDoneColor,
+    Color? labelCancelColor,
+    Color? labelDoneColor,
+  }) {
     this.buttonCancelColor = buttonCancelColor ?? ColorPalettes.white;
     this.buttonDoneColor = buttonDoneColor ?? ColorPalettes.darkAccent;
     this.labelCancelColor = labelCancelColor ?? ColorPalettes.black;
@@ -57,8 +61,10 @@ class SmoothDialog {
           builder: (context, setState) {
             return AlertDialog(
               shape: RoundedRectangleBorder(
-                  borderRadius:
-                      BorderRadius.all(Radius.circular(Sizes.dp16(context)))),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(Sizes.dp16(context)),
+                ),
+              ),
               contentPadding: EdgeInsets.fromLTRB(16, 24, 16, 8),
               content: SizedBox(
                 width: double.maxFinite,
@@ -93,15 +99,14 @@ class SmoothDialog {
                           progressIndicatorBuilder:
                               (context, url, downloadProgress) =>
                                   CircularProgressIndicator(
-                                      value: downloadProgress.progress),
+                                    value: downloadProgress.progress,
+                                  ),
                           errorWidget: (context, url, error) =>
                               Icon(Icons.error),
                         ),
-                      )
+                      ),
                     ],
-                    SizedBox(
-                      height: Sizes.dp8(context),
-                    ),
+                    SizedBox(height: Sizes.dp8(context)),
                     Text(
                       title,
                       style: TextStyle(
@@ -109,15 +114,11 @@ class SmoothDialog {
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    SizedBox(
-                      height: Sizes.dp8(context),
-                    ),
+                    SizedBox(height: Sizes.dp8(context)),
                     Text(
                       content,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: Sizes.dp13(context),
-                      ),
+                      style: TextStyle(fontSize: Sizes.dp13(context)),
                     ),
                     Expanded(
                       child: Align(
@@ -136,14 +137,17 @@ class SmoothDialog {
                                       },
                                       child: Container(
                                         padding: EdgeInsets.symmetric(
-                                            vertical: Sizes.dp12(context),
-                                            horizontal: Sizes.dp22(context)),
+                                          vertical: Sizes.dp12(context),
+                                          horizontal: Sizes.dp22(context),
+                                        ),
                                         decoration: BoxDecoration(
-                                            color: this
-                                                .buttonConfig
-                                                .buttonCancelColor,
-                                            borderRadius: BorderRadius.circular(
-                                                Sizes.dp16(context))),
+                                          color: this
+                                              .buttonConfig
+                                              .buttonCancelColor,
+                                          borderRadius: BorderRadius.circular(
+                                            Sizes.dp16(context),
+                                          ),
+                                        ),
                                         child: Text(
                                           this.buttonConfig.dialogCancel,
                                           textAlign: TextAlign.center,
@@ -165,29 +169,32 @@ class SmoothDialog {
                                       },
                                       child: Container(
                                         padding: EdgeInsets.symmetric(
-                                            vertical: Sizes.dp12(context),
-                                            horizontal: Sizes.dp26(context)),
+                                          vertical: Sizes.dp12(context),
+                                          horizontal: Sizes.dp26(context),
+                                        ),
                                         decoration: BoxDecoration(
-                                            color: this
-                                                .buttonConfig
-                                                .buttonDoneColor,
-                                            borderRadius: BorderRadius.circular(
-                                                Sizes.dp16(context))),
+                                          color:
+                                              this.buttonConfig.buttonDoneColor,
+                                          borderRadius: BorderRadius.circular(
+                                            Sizes.dp16(context),
+                                          ),
+                                        ),
                                         child: Text(
                                           this.buttonConfig.dialogDone,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: Sizes.dp13(context),
                                             fontWeight: FontWeight.bold,
-                                            color:
-                                                this.buttonConfig.labelDoneColor,
+                                            color: this
+                                                .buttonConfig
+                                                .labelDoneColor,
                                           ),
                                         ),
                                       ),
                                     ),
                                   ],
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),

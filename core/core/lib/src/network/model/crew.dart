@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:core/src/presentation/model/crew_ui.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 part 'crew.g.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 class CustomButton extends StatefulWidget {
   final VoidCallback? onPressed;
@@ -20,7 +20,9 @@ class _CustomButtonState extends State<CustomButton>
   void initState() {
     super.initState();
     _animationController = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 2000));
+      vsync: this,
+      duration: Duration(milliseconds: 2000),
+    );
     _animationTween = Tween<double>(begin: -1, end: 0)
         .chain(CurveTween(curve: Curves.easeInOutQuart))
         .animate(_animationController);
@@ -59,9 +61,7 @@ class _CustomButtonState extends State<CustomButton>
           style: TextButton.styleFrom(
             backgroundColor: ColorPalettes.darkAccent,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                Sizes.dp10(context),
-              ),
+              borderRadius: BorderRadius.circular(Sizes.dp10(context)),
             ),
           ),
           onPressed: widget.onPressed,

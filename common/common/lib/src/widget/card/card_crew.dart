@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 class CardCrew extends StatelessWidget {
   final String? image, name;
@@ -13,7 +13,8 @@ class CardCrew extends StatelessWidget {
       width: Sizes.width(context) / 4.4,
       child: Card(
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(Sizes.dp10(context))),
+          borderRadius: BorderRadius.circular(Sizes.dp10(context)),
+        ),
         child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(Sizes.dp10(context))),
           child: GridTile(

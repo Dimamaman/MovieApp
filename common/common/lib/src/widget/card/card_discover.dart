@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 class CardDiscover extends StatelessWidget {
   final String? image, title;
@@ -9,8 +9,14 @@ class CardDiscover extends StatelessWidget {
   final List<int>? genre;
   final VoidCallback? onTap;
 
-  const CardDiscover(
-      {super.key, this.image, this.title, this.rating, this.genre, this.onTap});
+  const CardDiscover({
+    super.key,
+    this.image,
+    this.title,
+    this.rating,
+    this.genre,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,29 +37,24 @@ class CardDiscover extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
-          height: Sizes.height(context) * .02,
-        ),
+        SizedBox(height: Sizes.height(context) * .02),
         Text(
           title ?? '',
           textAlign: TextAlign.center,
           style: TextStyle(
-              color: Colors.white,
-              fontSize: Sizes.width(context) / 14,
-              fontWeight: FontWeight.w600),
+            color: Colors.white,
+            fontSize: Sizes.width(context) / 14,
+            fontWeight: FontWeight.w600,
+          ),
         ),
-        SizedBox(
-          height: Sizes.height(context) * .01,
-        ),
+        SizedBox(height: Sizes.height(context) * .01),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: (genre ?? []).take(3).map(_buildGenreChip).toList(),
           ),
         ),
-        SizedBox(
-          height: Sizes.height(context) * .01,
-        ),
+        SizedBox(height: Sizes.height(context) * .01),
         Text(
           ratingValue.toString(),
           style: TextStyle(
@@ -61,9 +62,7 @@ class CardDiscover extends StatelessWidget {
             fontSize: Sizes.width(context) / 16,
           ),
         ),
-        SizedBox(
-          height: Sizes.height(context) * .005,
-        ),
+        SizedBox(height: Sizes.height(context) * .005),
         buildRatingBar(theme, context, ratingValue),
       ],
     );

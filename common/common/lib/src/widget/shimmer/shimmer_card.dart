@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ShimmerCard extends StatelessWidget {
@@ -20,9 +20,7 @@ class ShimmerCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: ColorPalettes.greyBg,
                 borderRadius: BorderRadius.all(
-                  Radius.circular(
-                    Sizes.dp10(context),
-                  ),
+                  Radius.circular(Sizes.dp10(context)),
                 ),
               ),
             ),
@@ -33,9 +31,7 @@ class ShimmerCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: ColorPalettes.greyBg,
                 borderRadius: BorderRadius.all(
-                  Radius.circular(
-                    Sizes.dp10(context),
-                  ),
+                  Radius.circular(Sizes.dp10(context)),
                 ),
               ),
             ),
@@ -46,9 +42,7 @@ class ShimmerCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: ColorPalettes.greyBg,
                 borderRadius: BorderRadius.all(
-                  Radius.circular(
-                    Sizes.dp10(context),
-                  ),
+                  Radius.circular(Sizes.dp10(context)),
                 ),
               ),
             ),

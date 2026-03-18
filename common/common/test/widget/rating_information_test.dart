@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 void main() {
   group('RatingInformation', () {
     testWidgets('displays rating value and labels', (tester) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(body: RatingInformation(rating: 7.5)),
-        ),
+        const MaterialApp(home: Scaffold(body: RatingInformation(rating: 7.5))),
       );
 
       expect(find.text('7.5'), findsOneWidget);
@@ -18,9 +16,7 @@ void main() {
 
     testWidgets('displays 5 star icons', (tester) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(body: RatingInformation(rating: 7.5)),
-        ),
+        const MaterialApp(home: Scaffold(body: RatingInformation(rating: 7.5))),
       );
 
       expect(find.byIcon(Icons.star), findsNWidgets(5));
@@ -28,9 +24,7 @@ void main() {
 
     testWidgets('displays 0.0 when rating is null', (tester) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(body: RatingInformation()),
-        ),
+        const MaterialApp(home: Scaffold(body: RatingInformation())),
       );
 
       expect(find.text('0.0'), findsOneWidget);
@@ -58,12 +52,11 @@ void main() {
       expect(find.text('0%'), findsOneWidget);
     });
 
-    testWidgets('displays 0% when vote is null (defaults to "0")',
-        (tester) async {
+    testWidgets('displays 0% when vote is null (defaults to "0")', (
+      tester,
+    ) async {
       await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(body: CircleProgress()),
-        ),
+        const MaterialApp(home: Scaffold(body: CircleProgress())),
       );
 
       expect(find.text('0%'), findsOneWidget);

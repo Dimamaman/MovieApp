@@ -16,3 +16,4 @@ class TrailerUI extends Equatable {
   @override
   List<Object> get props => [id, title, youtubeId, youtubeUrl];
 }
+

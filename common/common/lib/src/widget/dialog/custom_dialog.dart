@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 class CustomDialog extends StatelessWidget {
   final bool? isDark, groupValue;
@@ -26,9 +26,7 @@ class CustomDialog extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
-          height: Sizes.dp10(context),
-        ),
+        SizedBox(height: Sizes.dp10(context)),
         Padding(
           padding: EdgeInsets.only(left: Sizes.dp10(context)),
           child: Row(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 class CardPortfolio extends StatelessWidget {
   final String? imageAsset;
@@ -23,14 +23,9 @@ class CardPortfolio extends StatelessWidget {
                 SizedBox(
                   height: Sizes.width(context) / 7,
                   width: Sizes.width(context) / 7,
-                  child: Image.asset(
-                    imageAsset ?? '',
-                    fit: BoxFit.contain,
-                  ),
+                  child: Image.asset(imageAsset ?? '', fit: BoxFit.contain),
                 ),
-                SizedBox(
-                  width: Sizes.dp10(context),
-                ),
+                SizedBox(width: Sizes.dp10(context)),
                 Expanded(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -44,16 +39,12 @@ class CardPortfolio extends StatelessWidget {
                           fontSize: Sizes.dp18(context),
                         ),
                       ),
-                      SizedBox(
-                        height: Sizes.dp18(context),
-                      ),
+                      SizedBox(height: Sizes.dp18(context)),
                       Text(
                         url ?? '',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: Sizes.dp14(context),
-                        ),
+                        style: TextStyle(fontSize: Sizes.dp14(context)),
                       ),
                     ],
                   ),

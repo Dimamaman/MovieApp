@@ -1,9 +1,9 @@
 import 'dart:async';
 
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:moviecatalogue/ui/dashboard/dashboard_screen.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:shared/shared.dart';
 
 class SplashScreen extends StatefulWidget {
   static const routeName = "/splash";
@@ -43,10 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: SizedBox(
                 height: Sizes.width(context) / 3,
                 width: Sizes.width(context) / 3,
-                child: Image.asset(
-                  ImagesAssets.movieIcon,
-                  fit: BoxFit.contain,
-                ),
+                child: Image.asset(ImagesAssets.movieIcon, fit: BoxFit.contain),
               ),
             ),
             Align(
@@ -55,18 +52,18 @@ class _SplashScreenState extends State<SplashScreen> {
                 future: _getVersion(),
                 builder:
                     (BuildContext context, AsyncSnapshot<String> snapshot) {
-                  var verInfo = "";
-                  if (snapshot.hasData) {
-                    verInfo = "v ${snapshot.data}";
-                  }
-                  return Container(
-                    margin: EdgeInsets.only(bottom: Sizes.dp30(context)),
-                    child: Text(
-                      verInfo,
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  );
-                },
+                      var verInfo = "";
+                      if (snapshot.hasData) {
+                        verInfo = "v ${snapshot.data}";
+                      }
+                      return Container(
+                        margin: EdgeInsets.only(bottom: Sizes.dp30(context)),
+                        child: Text(
+                          verInfo,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      );
+                    },
               ),
             ),
           ],

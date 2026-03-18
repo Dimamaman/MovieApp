@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/common.dart';
 
 void main() {
   group('CustomButton', () {
@@ -45,9 +45,7 @@ void main() {
     testWidgets('shows empty text when text is null', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: Scaffold(
-            body: CustomButton(onPressed: () {}),
-          ),
+          home: Scaffold(body: CustomButton(onPressed: () {})),
         ),
       );
       await tester.pump(const Duration(seconds: 3));

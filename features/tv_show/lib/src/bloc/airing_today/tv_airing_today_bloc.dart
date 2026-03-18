@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:dio/dio.dart';
-import 'package:shared/shared.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared/common.dart';
 
 import 'tv_airing_today_event.dart';
 import 'tv_airing_today_state.dart';
@@ -9,7 +9,8 @@ import 'tv_airing_today_state.dart';
 class TvAiringTodayBloc extends Bloc<TvAiringTodayEvent, TvAiringTodayState> {
   final Repository repository;
 
-  TvAiringTodayBloc({required this.repository}) : super(InitialTvAiringToday()) {
+  TvAiringTodayBloc({required this.repository})
+    : super(InitialTvAiringToday()) {
     on<LoadTvAiringToday>((event, emit) async {
       await _loadTvAiringToday(emit);
     });
@@ -19,7 +20,9 @@ class TvAiringTodayBloc extends Bloc<TvAiringTodayEvent, TvAiringTodayState> {
     try {
       emit(TvAiringTodayLoading());
       var movies = await repository.getTvAiringToday(
-          ApiConstant.apiKey, ApiConstant.language);
+        ApiConstant.apiKey,
+        ApiConstant.language,
+      );
       if (movies.results.isEmpty) {
         emit(TvAiringTodayNoData(AppConstant.noData));
       } else {

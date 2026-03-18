@@ -1,7 +1,7 @@
 import 'package:core/core.dart';
 import 'package:dio/dio.dart';
-import 'package:shared/shared.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared/common.dart';
 
 import 'tv_on_the_air_event.dart';
 import 'tv_on_the_air_state.dart';
@@ -19,7 +19,9 @@ class TvOnTheAirBloc extends Bloc<TvOnTheAirEvent, TvOnTheAirState> {
     try {
       emit(TvOnTheAirLoading());
       var movies = await repository.getTvOnTheAir(
-          ApiConstant.apiKey, ApiConstant.language);
+        ApiConstant.apiKey,
+        ApiConstant.language,
+      );
       if (movies.results.isEmpty) {
         emit(TvOnTheAirNoData(AppConstant.noData));
       } else {
