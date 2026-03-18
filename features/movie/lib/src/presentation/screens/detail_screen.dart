@@ -1,8 +1,9 @@
 import 'dart:io';
 
-import 'package:core/core.dart';
+import 'package:feature_detail/feature_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared/shared.dart';
 
 import '../../routes/movie_routes.dart';

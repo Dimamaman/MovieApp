@@ -1,6 +1,7 @@
-import 'package:core/core.dart';
+import 'package:feature_setting/feature_setting.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moviecatalogue/ui/about/about_screen.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared/shared.dart';

@@ -1,7 +1,8 @@
 import 'package:feature_movie/feature_movie.dart';
+import 'package:feature_tv_show/feature_tv_show.dart';
 import 'package:flutter/material.dart';
 import 'package:moviecatalogue/ui/home/discover_screen.dart';
-import 'package:moviecatalogue/ui/home/tv_show_screen.dart';
+import 'package:moviecatalogue/ui/menu/menu.dart';
 import 'package:shared/shared.dart';
 
 class DashBoardScreen extends StatefulWidget {
@@ -49,7 +50,24 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         onPageChanged: _onPageChanged,
         children: <Widget>[
           MovieScreen(),
-          TvShowScreen(),
+          TvShowScreen(
+            actions: [
+              PopupMenuButton<Menu>(
+                icon: Icon(Icons.more_vert),
+                onSelected: (Menu menu) {
+                  Navigation.intent(context, menu.route);
+                },
+                itemBuilder: (BuildContext context) {
+                  return menus.map((Menu menu) {
+                    return PopupMenuItem<Menu>(
+                      value: menu,
+                      child: Text(menu.title),
+                    );
+                  }).toList();
+                },
+              ),
+            ],
+          ),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

@@ -18,6 +18,12 @@ dependencies:
     path: common/common
   feature_movie:
     path: features/movie
+  feature_tv_show:
+    path: features/tv_show
+  feature_detail:
+    path: features/detail
+  feature_setting:
+    path: features/setting
 
 dev_dependencies:
   flutter_test:

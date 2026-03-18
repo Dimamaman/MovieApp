@@ -1,0 +1,39 @@
+import 'package:core/core.dart';
+import 'package:dio/dio.dart';
+import 'package:shared/shared.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'discover_movie_event.dart';
+import 'discover_movie_state.dart';
+
+class DiscoverMovieBloc extends Bloc<DiscoverMovieEvent, DiscoverMovieState> {
+  final Repository repository;
+
+  DiscoverMovieBloc({required this.repository}) : super(InitialDiscoverMovie()) {
+    on<LoadDiscoverMovie>((event, emit) async {
+      await _loadDiscoverMovie(emit);
+    });
+  }
+
+  Future<void> _loadDiscoverMovie(Emitter<DiscoverMovieState> emit) async {
+    try {
+      emit(DiscoverMovieLoading());
+      var movies = await repository.getDiscoverMovie(
+          ApiConstant.apiKey, ApiConstant.language);
+      if (movies.results.isEmpty) {
+        emit(DiscoverMovieNoData(AppConstant.noData));
+      } else {
+        emit(DiscoverMovieHasData(movies));
+      }
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.receiveTimeout) {
+        emit(DiscoverMovieNoInternetConnection());
+      } else if (e.type == DioExceptionType.unknown) {
+        emit(DiscoverMovieNoInternetConnection());
+      } else {
+        emit(DiscoverMovieError(e.toString()));
+      }
+    }
+  }
+}
