@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared/common.dart';
+import 'package:common/common.dart';
 
 class DateWidget extends StatefulWidget {
   const DateWidget({super.key});

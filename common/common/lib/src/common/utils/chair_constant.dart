@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shared/common.dart';
+import 'package:common/common.dart';
 
 class ChairConstant {
   static Widget grey(BuildContext context) {

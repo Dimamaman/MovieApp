@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared/common.dart';
+import 'package:common/common.dart';
 
 import '../presentation/screens/booking_screen.dart';
 import '../presentation/screens/detail_screen.dart';

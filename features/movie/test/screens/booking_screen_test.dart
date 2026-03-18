@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 import 'package:feature_movie/feature_movie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared/common.dart';
+import 'package:common/common.dart';
 
 void main() {
   late MoviesUI tMovieUI;

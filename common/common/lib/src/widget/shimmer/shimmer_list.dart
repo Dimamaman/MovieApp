@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared/common.dart';
+import 'package:common/common.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ShimmerList extends StatelessWidget {

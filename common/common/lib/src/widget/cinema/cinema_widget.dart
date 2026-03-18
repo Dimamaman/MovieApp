@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:shared/common.dart';
-import 'package:shared/src/common/utils/chair_constant.dart';
+import 'package:common/common.dart';
+import 'package:common/src/common/utils/chair_constant.dart';
 
 class CinemaWidget extends StatefulWidget {
   final String? movieBackground;

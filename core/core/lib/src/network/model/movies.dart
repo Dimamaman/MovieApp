@@ -1,7 +1,7 @@
 import 'package:core/src/network/model/genres.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:shared/common.dart';
+import 'package:common/common.dart';
 
 part 'movies.g.dart';
 

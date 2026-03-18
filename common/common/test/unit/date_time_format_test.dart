@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared/common.dart';
+import 'package:common/common.dart';
 
 void main() {
   group('DateTimeFormat.day', () {

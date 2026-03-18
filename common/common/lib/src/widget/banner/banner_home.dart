@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:shared/common.dart';
+import 'package:common/common.dart';
 
 class BannerHome extends StatelessWidget {
   final Function(int index, CarouselPageChangedReason reason) onPageChanged;
