@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'package:moviecatalogue/ui/detail/detail_screen.dart';
+import 'package:feature_movie/feature_movie.dart';
 import 'package:shared/shared.dart';
 
 class TvPopularScreen extends StatefulWidget {
@@ -62,7 +62,7 @@ class _TvPopularScreenState extends State<TvPopularScreen> {
                     onTap: () {
                       Navigation.intentWithData(
                         context,
-                        DetailScreen.routeName,
+                        MovieRoutes.detail,
                         ScreenArguments(movie, false, false),
                       );
                     },

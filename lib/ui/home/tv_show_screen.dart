@@ -4,7 +4,7 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'package:moviecatalogue/ui/detail/detail_screen.dart';
+import 'package:feature_movie/feature_movie.dart';
 import 'package:moviecatalogue/ui/menu/menu.dart';
 import 'package:moviecatalogue/ui/tv_show/airing_today/airing_today_screen.dart';
 import 'package:moviecatalogue/ui/tv_show/on_the_air/on_the_air_screen.dart';
@@ -122,7 +122,7 @@ class _TvShowScreenState extends State<TvShowScreen> {
             },
             data: state.result,
             currentIndex: _current,
-            routeNameDetail: DetailScreen.routeName,
+            routeNameDetail: MovieRoutes.detail,
             routeNameAll: OnTheAirScreen.routeName,
           );
         } else if (state is TvOnTheAirLoading) {
@@ -202,7 +202,7 @@ class _TvShowScreenState extends State<TvShowScreen> {
                       onTap: () {
                         Navigation.intentWithData(
                           context,
-                          DetailScreen.routeName,
+                          MovieRoutes.detail,
                           ScreenArguments(movie, false, false),
                         );
                       },
@@ -289,7 +289,7 @@ class _TvShowScreenState extends State<TvShowScreen> {
                       onTap: () {
                         Navigation.intentWithData(
                           context,
-                          DetailScreen.routeName,
+                          MovieRoutes.detail,
                           ScreenArguments(movie, false, false),
                         );
                       },

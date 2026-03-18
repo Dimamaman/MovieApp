@@ -3,26 +3,25 @@ import 'dart:io';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:moviecatalogue/ui/booking/booking_screen.dart';
 import 'package:shared/shared.dart';
 
+import '../../routes/movie_routes.dart';
+
 class DetailScreen extends StatefulWidget {
-  static const routeName = '/detail_movies';
+  const DetailScreen({super.key, required this.arguments});
 
   final ScreenArguments arguments;
-
-  const DetailScreen({super.key, required this.arguments});
 
   @override
   State<DetailScreen> createState() => _DetailScreenState();
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-  _loadTrailer(BuildContext context, int movieId, bool isFromMovie) {
+  void _loadTrailer(BuildContext context, int movieId, bool isFromMovie) {
     context.read<TrailerBloc>().add(LoadTrailer(movieId, isFromMovie));
   }
 
-  _loadCrew(BuildContext context, int movieId, bool isFromMovie) {
+  void _loadCrew(BuildContext context, int movieId, bool isFromMovie) {
     context.read<CrewBloc>().add(LoadCrew(movieId, isFromMovie));
   }
 
@@ -43,10 +42,10 @@ class _DetailScreenState extends State<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
+    final theme = Theme.of(context);
     return Scaffold(
       body: SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         child: Stack(
           alignment: Alignment.center,
           children: <Widget>[
@@ -82,16 +81,14 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
-                    left: Sizes.dp20(context),
-                    right: Sizes.dp20(context),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: Sizes.dp20(context),
                   ),
                   child: _buildYoutube(),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
-                    left: Sizes.dp20(context),
-                    right: Sizes.dp20(context),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: Sizes.dp20(context),
                   ),
                   child: _buildCrew(),
                 ),
@@ -101,11 +98,11 @@ class _DetailScreenState extends State<DetailScreen> {
                     bottom: Sizes.dp20(context),
                   ),
                   child: CustomButton(
-                    text: "Booking Ticket",
+                    text: 'Booking Ticket',
                     onPressed: () {
                       Navigation.intentWithData(
                         context,
-                        BookingScreen.routeName,
+                        MovieRoutes.booking,
                         ScreenArguments(widget.arguments.movies, true, false),
                       );
                     },
@@ -119,9 +116,9 @@ class _DetailScreenState extends State<DetailScreen> {
               child: IconButton(
                 iconSize: Sizes.dp30(context),
                 color: theme.colorScheme.secondary,
-                icon: Icon(Icons.favorite_border),
+                icon: const Icon(Icons.favorite_border),
                 onPressed: () {
-                  PopUp.showSuccess("Add to Favorite");
+                  PopUp.showSuccess('Add to Favorite');
                 },
               ),
             ),
@@ -130,8 +127,8 @@ class _DetailScreenState extends State<DetailScreen> {
               left: Sizes.dp5(context),
               child: IconButton(
                 icon: Platform.isAndroid
-                    ? Icon(Icons.arrow_back)
-                    : Icon(Icons.arrow_back_ios),
+                    ? const Icon(Icons.arrow_back)
+                    : const Icon(Icons.arrow_back_ios),
                 onPressed: () => Navigator.pop(context),
               ),
             ),
@@ -161,11 +158,11 @@ class _DetailScreenState extends State<DetailScreen> {
               if (state is TrailerHasData) {
                 return ListView.builder(
                   shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   itemCount: state.trailer.trailer.length,
                   itemBuilder: (BuildContext context, int index) {
-                    Trailer trailer = state.trailer.trailer[index];
+                    final trailer = state.trailer.trailer[index];
                     return CardTrailer(
                       title: trailer.title,
                       youtube: trailer.youtubeId,
@@ -194,7 +191,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                 );
               } else {
-                return Center(child: Text(""));
+                return const SizedBox.shrink();
               }
             },
           ),
@@ -223,11 +220,11 @@ class _DetailScreenState extends State<DetailScreen> {
               if (state is CrewHasData) {
                 return ListView.builder(
                   shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   itemCount: state.crew.crew.length,
                   itemBuilder: (BuildContext context, int index) {
-                    Crew crew = state.crew.crew[index];
+                    final crew = state.crew.crew[index];
                     return CardCrew(
                       image: crew.profile,
                       name: crew.characterName,
@@ -250,7 +247,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   ),
                 );
               } else {
-                return Center(child: Text(""));
+                return const SizedBox.shrink();
               }
             },
           ),

@@ -2,22 +2,22 @@ import 'dart:async';
 
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'package:moviecatalogue/ui/detail/detail_screen.dart';
 import 'package:shared/shared.dart';
 
+import '../../../feature_movie.dart';
+
 class MoviePopularScreen extends StatefulWidget {
-  static const routeName = '/movie_popular';
+  const MoviePopularScreen({super.key});
 
   @override
-  _MoviePopularScreenState createState() => _MoviePopularScreenState();
+  State<MoviePopularScreen> createState() => _MoviePopularScreenState();
 }
 
 class _MoviePopularScreenState extends State<MoviePopularScreen> {
   late Completer<void> _refreshCompleter;
 
-  _loadMoviePopular(BuildContext context) {
+  void _loadMoviePopular(BuildContext context) {
     context.read<MoviePopularBloc>().add(LoadMoviePopular());
   }
 
@@ -37,7 +37,7 @@ class _MoviePopularScreenState extends State<MoviePopularScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Popular Movies'),
+        title: const Text('Popular Movies'),
         centerTitle: true,
       ),
       body: LiquidPullToRefresh(
@@ -59,11 +59,14 @@ class _MoviePopularScreenState extends State<MoviePopularScreen> {
                     vote: movie.ratingText,
                     releaseDate: movie.releaseDate,
                     overview: movie.overview,
-                    genre: movie.genreIds.take(3).map(buildGenreChip).toList(),
+                    genre: movie.genreIds
+                        .take(3)
+                        .map(buildGenreChip)
+                        .toList(),
                     onTap: () {
                       Navigation.intentWithData(
                         context,
-                        DetailScreen.routeName,
+                        MovieRoutes.detail,
                         ScreenArguments(movie, true, false),
                       );
                     },
@@ -88,7 +91,7 @@ class _MoviePopularScreenState extends State<MoviePopularScreen> {
                 onPressed: () => _loadMoviePopular(context),
               );
             } else {
-              return Center(child: Text(""));
+              return const SizedBox.shrink();
             }
           },
         ),
@@ -96,3 +99,4 @@ class _MoviePopularScreenState extends State<MoviePopularScreen> {
     );
   }
 }
+

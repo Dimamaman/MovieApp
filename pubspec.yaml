@@ -11,11 +11,13 @@ dependencies:
 
   # This is our modular
   core:
-    path: libraries/core
+    path: core/core
   dependencies:
     path: libraries/dependencies
   shared:
-    path: libraries/shared
+    path: common/common
+  feature_movie:
+    path: features/movie
 
 dev_dependencies:
   flutter_test:

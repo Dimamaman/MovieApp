@@ -15,9 +15,9 @@ dependencies:
 
   # This is our modular
   dependencies:
-    path: ../dependencies
+    path: ../../libraries/dependencies
   shared:
-    path: ../shared
+    path: ../../common/common
 
 dev_dependencies:
   flutter_test:

@@ -2,33 +2,31 @@ import 'dart:async';
 
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'package:moviecatalogue/ui/detail/detail_screen.dart';
-import 'package:moviecatalogue/ui/menu/menu.dart';
-import 'package:moviecatalogue/ui/movie/now_playing/now_playing_screen.dart';
-import 'package:moviecatalogue/ui/movie/popular/movie_popular_screen.dart';
-import 'package:moviecatalogue/ui/movie/up_coming/up_coming_screen.dart';
 import 'package:shared/shared.dart';
 
+import '../../../feature_movie.dart';
+
 class MovieScreen extends StatefulWidget {
+  const MovieScreen({super.key});
+
   @override
-  _MovieScreenState createState() => _MovieScreenState();
+  State<MovieScreen> createState() => _MovieScreenState();
 }
 
 class _MovieScreenState extends State<MovieScreen> {
   late Completer<void> _refreshCompleter;
   int _current = 0;
 
-  _loadMovieNowPlaying(BuildContext context) {
+  void _loadMovieNowPlaying(BuildContext context) {
     context.read<MovieNowPlayingBloc>().add(LoadMovieNowPlaying());
   }
 
-  _loadMoviePopular(BuildContext context) {
+  void _loadMoviePopular(BuildContext context) {
     context.read<MoviePopularBloc>().add(LoadMoviePopular());
   }
 
-  _loadMovieUpComing(BuildContext context) {
+  void _loadMovieUpComing(BuildContext context) {
     context.read<MovieUpComingBloc>().add(LoadMovieUpComing());
   }
 
@@ -53,26 +51,8 @@ class _MovieScreenState extends State<MovieScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('Movies'),
+        title: const Text('Movies'),
         centerTitle: true,
-        actions: <Widget>[
-          // overflow menu
-          PopupMenuButton<Menu>(
-            icon: Icon(Icons.more_vert),
-            onSelected: (Menu menu) {
-              // Causes the app to rebuild with the new _selectedChoice.
-              Navigation.intent(context, menu.route);
-            },
-            itemBuilder: (BuildContext context) {
-              return menus.map((Menu menu) {
-                return PopupMenuItem<Menu>(
-                  value: menu,
-                  child: Text(menu.title),
-                );
-              }).toList();
-            },
-          ),
-        ],
       ),
       body: LiquidPullToRefresh(
         onRefresh: _refresh,
@@ -84,23 +64,16 @@ class _MovieScreenState extends State<MovieScreen> {
 
   Widget _buildBody(BuildContext context) {
     return SingleChildScrollView(
-      physics: ClampingScrollPhysics(), //kill bounce iOS
+      physics: const ClampingScrollPhysics(),
       child: Container(
         margin: EdgeInsets.all(Sizes.dp10(context)),
         child: Column(
           children: <Widget>[
             _buildBanner(context),
-            SizedBox(
-              height: Sizes.dp12(context),
-            ),
+            SizedBox(height: Sizes.dp12(context)),
             _buildUpComing(context),
-            SizedBox(
-              height: Sizes.dp12(context),
-            ),
+            SizedBox(height: Sizes.dp12(context)),
             _buildPopular(context),
-            SizedBox(
-              height: Sizes.dp12(context),
-            ),
           ],
         ),
       ),
@@ -116,14 +89,12 @@ class _MovieScreenState extends State<MovieScreen> {
           return BannerHome(
             isFromMovie: true,
             onPageChanged: (index, reason) {
-              setState(() {
-                _current = index;
-              });
+              setState(() => _current = index);
             },
             data: state.result,
             currentIndex: _current,
-            routeNameDetail: DetailScreen.routeName,
-            routeNameAll: NowPlayingScreen.routeName,
+            routeNameDetail: MovieRoutes.detail,
+            routeNameAll: MovieRoutes.nowPlaying,
           );
         } else if (state is MovieNowPlayingLoading) {
           return ShimmerBanner();
@@ -143,7 +114,7 @@ class _MovieScreenState extends State<MovieScreen> {
             onPressed: () => _loadMovieNowPlaying(context),
           );
         } else {
-          return Center(child: Text(""));
+          return const SizedBox.shrink();
         }
       },
     );
@@ -153,31 +124,28 @@ class _MovieScreenState extends State<MovieScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Container(
-          alignment: Alignment.centerLeft,
-          child: Row(
-            children: <Widget>[
-              Text(
-                'Up Coming',
-                style: TextStyle(
-                  fontSize: Sizes.dp14(context),
-                  fontWeight: FontWeight.bold,
-                ),
+        Row(
+          children: <Widget>[
+            Text(
+              'Up Coming',
+              style: TextStyle(
+                fontSize: Sizes.dp14(context),
+                fontWeight: FontWeight.bold,
               ),
-              Spacer(),
-              IconButton(
-                icon: Icon(
-                  Icons.arrow_forward_ios,
-                  size: Sizes.dp16(context),
-                ),
-                onPressed: () {
-                  Navigation.intent(context, UpComingScreen.routeName);
-                },
+            ),
+            const Spacer(),
+            IconButton(
+              icon: Icon(
+                Icons.arrow_forward_ios,
+                size: Sizes.dp16(context),
               ),
-            ],
-          ),
+              onPressed: () {
+                Navigation.intent(context, MovieRoutes.upComing);
+              },
+            ),
+          ],
         ),
-        Container(
+        SizedBox(
           width: Sizes.width(context),
           height: Sizes.width(context) / 1.8,
           child: BlocBuilder<MovieUpComingBloc, MovieUpComingState>(
@@ -187,7 +155,7 @@ class _MovieScreenState extends State<MovieScreen> {
                 _refreshCompleter = Completer();
                 return ListView.builder(
                   shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   itemCount: state.result.results.length > 5
                       ? 5
@@ -202,7 +170,7 @@ class _MovieScreenState extends State<MovieScreen> {
                       onTap: () {
                         Navigation.intentWithData(
                           context,
-                          DetailScreen.routeName,
+                          MovieRoutes.detail,
                           ScreenArguments(movie, true, false),
                         );
                       },
@@ -227,7 +195,7 @@ class _MovieScreenState extends State<MovieScreen> {
                   onPressed: () => _loadMovieUpComing(context),
                 );
               } else {
-                return Center(child: Text(""));
+                return const SizedBox.shrink();
               }
             },
           ),
@@ -240,31 +208,28 @@ class _MovieScreenState extends State<MovieScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Container(
-          alignment: Alignment.centerLeft,
-          child: Row(
-            children: <Widget>[
-              Text(
-                'Popular',
-                style: TextStyle(
-                  fontSize: Sizes.dp14(context),
-                  fontWeight: FontWeight.bold,
-                ),
+        Row(
+          children: <Widget>[
+            Text(
+              'Popular',
+              style: TextStyle(
+                fontSize: Sizes.dp14(context),
+                fontWeight: FontWeight.bold,
               ),
-              Spacer(),
-              IconButton(
-                icon: Icon(
-                  Icons.arrow_forward_ios,
-                  size: Sizes.dp16(context),
-                ),
-                onPressed: () {
-                  Navigation.intent(context, MoviePopularScreen.routeName);
-                },
+            ),
+            const Spacer(),
+            IconButton(
+              icon: Icon(
+                Icons.arrow_forward_ios,
+                size: Sizes.dp16(context),
               ),
-            ],
-          ),
+              onPressed: () {
+                Navigation.intent(context, MovieRoutes.popular);
+              },
+            ),
+          ],
         ),
-        Container(
+        SizedBox(
           width: Sizes.width(context),
           height: Sizes.width(context) / 1.8,
           child: BlocBuilder<MoviePopularBloc, MoviePopularState>(
@@ -274,7 +239,7 @@ class _MovieScreenState extends State<MovieScreen> {
                 _refreshCompleter = Completer();
                 return ListView.builder(
                   shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   itemCount: state.result.results.length > 5
                       ? 5
@@ -289,7 +254,7 @@ class _MovieScreenState extends State<MovieScreen> {
                       onTap: () {
                         Navigation.intentWithData(
                           context,
-                          DetailScreen.routeName,
+                          MovieRoutes.detail,
                           ScreenArguments(movie, true, false),
                         );
                       },
@@ -314,7 +279,7 @@ class _MovieScreenState extends State<MovieScreen> {
                   onPressed: () => _loadMoviePopular(context),
                 );
               } else {
-                return Center(child: Text(""));
+                return const SizedBox.shrink();
               }
             },
           ),
@@ -323,3 +288,4 @@ class _MovieScreenState extends State<MovieScreen> {
     );
   }
 }
+

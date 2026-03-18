@@ -2,27 +2,27 @@ import 'dart:async';
 
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
-import 'package:moviecatalogue/ui/detail/detail_screen.dart';
 import 'package:shared/shared.dart';
 
-class UpComingScreen extends StatefulWidget {
-  static const routeName = '/up_coming';
+import '../../../feature_movie.dart';
+
+class NowPlayingScreen extends StatefulWidget {
+  const NowPlayingScreen({super.key});
 
   @override
-  _UpComingScreenState createState() => _UpComingScreenState();
+  State<NowPlayingScreen> createState() => _NowPlayingScreenState();
 }
 
-class _UpComingScreenState extends State<UpComingScreen> {
+class _NowPlayingScreenState extends State<NowPlayingScreen> {
   late Completer<void> _refreshCompleter;
 
-  _loadMovieUpComing(BuildContext context) {
-    context.read<MovieUpComingBloc>().add(LoadMovieUpComing());
+  void _loadMovieNowPlaying(BuildContext context) {
+    context.read<MovieNowPlayingBloc>().add(LoadMovieNowPlaying());
   }
 
   Future<void> _refresh() {
-    _loadMovieUpComing(context);
+    _loadMovieNowPlaying(context);
     return _refreshCompleter.future;
   }
 
@@ -30,22 +30,22 @@ class _UpComingScreenState extends State<UpComingScreen> {
   void initState() {
     super.initState();
     _refreshCompleter = Completer<void>();
-    _loadMovieUpComing(context);
+    _loadMovieNowPlaying(context);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Up Coming Movie'),
+        title: const Text('Now Playing Movies'),
         centerTitle: true,
       ),
       body: LiquidPullToRefresh(
         onRefresh: _refresh,
         showChildOpacityTransition: false,
-        child: BlocBuilder<MovieUpComingBloc, MovieUpComingState>(
+        child: BlocBuilder<MovieNowPlayingBloc, MovieNowPlayingState>(
           builder: (context, state) {
-            if (state is MovieUpComingHasData) {
+            if (state is MovieNowPlayingHasData) {
               _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return ListView.builder(
@@ -59,36 +59,39 @@ class _UpComingScreenState extends State<UpComingScreen> {
                     vote: movie.ratingText,
                     releaseDate: movie.releaseDate,
                     overview: movie.overview,
-                    genre: movie.genreIds.take(3).map(buildGenreChip).toList(),
+                    genre: movie.genreIds
+                        .take(3)
+                        .map(buildGenreChip)
+                        .toList(),
                     onTap: () {
                       Navigation.intentWithData(
                         context,
-                        DetailScreen.routeName,
+                        MovieRoutes.detail,
                         ScreenArguments(movie, true, false),
                       );
                     },
                   );
                 },
               );
-            } else if (state is MovieUpComingLoading) {
+            } else if (state is MovieNowPlayingLoading) {
               return ShimmerList();
-            } else if (state is MovieUpComingError) {
+            } else if (state is MovieNowPlayingError) {
               _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return CustomErrorWidget(message: state.errorMessage);
-            } else if (state is MovieUpComingNoData) {
+            } else if (state is MovieNowPlayingNoData) {
               _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return CustomErrorWidget(message: state.message);
-            } else if (state is MovieUpComingNoInternetConnection) {
+            } else if (state is MovieNowPlayingNoInternetConnection) {
               _refreshCompleter.complete();
               _refreshCompleter = Completer();
               return NoInternetWidget(
                 message: AppConstant.noInternetConnection,
-                onPressed: () => _loadMovieUpComing(context),
+                onPressed: () => _loadMovieNowPlaying(context),
               );
             } else {
-              return Center(child: Text(""));
+              return const SizedBox.shrink();
             }
           },
         ),
@@ -96,3 +99,4 @@ class _UpComingScreenState extends State<UpComingScreen> {
     );
   }
 }
+

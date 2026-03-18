@@ -1,6 +1,6 @@
+import 'package:feature_movie/feature_movie.dart';
 import 'package:flutter/material.dart';
 import 'package:moviecatalogue/ui/home/discover_screen.dart';
-import 'package:moviecatalogue/ui/home/movie_screen.dart';
 import 'package:moviecatalogue/ui/home/tv_show_screen.dart';
 import 'package:shared/shared.dart';
 

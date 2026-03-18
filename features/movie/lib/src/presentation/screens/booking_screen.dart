@@ -1,51 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:moviecatalogue/ui/dashboard/dashboard_screen.dart';
 import 'package:shared/shared.dart';
 
 class BookingScreen extends StatelessWidget {
-  static const routeName = '/booking';
+  const BookingScreen({super.key, required this.arguments});
 
-  const BookingScreen({super.key});
+  final ScreenArguments arguments;
 
   @override
   Widget build(BuildContext context) {
-    var themeData = Theme.of(context);
-    var _isDarkTheme = themeData.appBarTheme.backgroundColor == null;
-    final ScreenArguments args =
-        ModalRoute.of(context)!.settings.arguments as ScreenArguments;
+    final themeData = Theme.of(context);
+    final isDarkTheme = themeData.appBarTheme.backgroundColor == null;
     return Scaffold(
       backgroundColor:
-          !_isDarkTheme ? ColorPalettes.darkPrimary : ColorPalettes.white,
+          !isDarkTheme ? ColorPalettes.darkPrimary : ColorPalettes.white,
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        title: Text(args.movies.name),
+        title: Text(arguments.movies.name),
       ),
       body: SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+        physics: const ClampingScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.all(Sizes.dp20(context)),
           child: Column(
             children: <Widget>[
               DateWidget(),
               TimeWidget(),
-              CinemaWidget(movieBackground: args.movies.backdropUrl),
+              CinemaWidget(movieBackground: arguments.movies.backdropUrl),
               Padding(
-                padding: EdgeInsets.only(
-                  top: Sizes.dp20(context),
-                ),
+                padding: EdgeInsets.only(top: Sizes.dp20(context)),
                 child: CustomButton(
-                  text: "Pay",
+                  text: 'Pay',
                   onPressed: () {
                     SmoothDialog(
                       context: context,
                       path: ImagesAssets.successful,
                       mode: SmoothMode.Lottie,
-                      content: "Thanks for your movie ticket order",
-                      title: "Payment Successful!",
+                      content: 'Thanks for your movie ticket order',
+                      title: 'Payment Successful!',
                       submit: () {
-                        Navigation.intentWithClearAllRoutes(
-                            context, DashBoardScreen.routeName);
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst);
                       },
                     );
                   },

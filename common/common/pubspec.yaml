@@ -13,9 +13,9 @@ dependencies:
 
   # This is our modular
   core:
-    path: ../core
+    path: ../../core/core
   dependencies:
-    path: ../dependencies
+    path: ../../libraries/dependencies
 
 dev_dependencies:
   flutter_test:

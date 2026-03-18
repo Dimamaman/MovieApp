@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:moviecatalogue/ui/detail/detail_screen.dart';
+import 'package:feature_movie/feature_movie.dart';
 import 'package:shared/shared.dart';
 
 class DiscoverScreen extends StatefulWidget {
@@ -85,7 +85,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           onTap: () {
                             Navigation.intentWithData(
                               context,
-                              DetailScreen.routeName,
+                              MovieRoutes.detail,
                               ScreenArguments(movie, true, false),
                             );
                           },

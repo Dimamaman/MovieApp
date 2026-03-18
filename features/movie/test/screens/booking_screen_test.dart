@@ -1,23 +1,8 @@
 import 'package:core/core.dart';
+import 'package:feature_movie/feature_movie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:moviecatalogue/ui/booking/booking_screen.dart';
 import 'package:shared/shared.dart';
-
-/*
-
-Yaratilgan testlar:
-
-#	Test	                                        Nima tekshiradi
-1	displays app bar with movie title	            AppBar da film nomi ko'rinishi
-2	shows DateWidget, TimeWidget, CinemaWidget	    Sana, vaqt va kino widgetlari
-3	shows Pay button	                            "Pay" tugmasi mavjudligi
-4	tapping Pay shows SmoothDialog	                "Pay" bosilganda dialog (Payment Successful!) chiqishi
-5	dialog shows Done and Cancel buttons	        Dialogda "Done" va "Cancel" tugmalari
-6	tapping Cancel closes the dialog	            "Cancel" bosilganda dialog yopilishi
-7	has correct routeName	                        routeName = '/booking' ekanligi
-
-*/
 
 void main() {
   late MoviesUI tMovieUI;
@@ -45,31 +30,11 @@ void main() {
   Future<void> pumpBookingScreen(WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
-        home: Builder(
-          builder: (context) {
-            return ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    settings: RouteSettings(
-                      name: BookingScreen.routeName,
-                      arguments: tArguments,
-                    ),
-                    builder: (_) => const BookingScreen(),
-                  ),
-                );
-              },
-              child: const Text('Open'),
-            );
-          },
-        ),
+        home: BookingScreen(arguments: tArguments),
       ),
     );
 
-    await tester.tap(find.text('Open'));
-    await tester.pump();
     await tester.pump(const Duration(seconds: 1));
-    await tester.pump(const Duration(seconds: 3));
   }
 
   void ignoreOverflowErrors(FlutterErrorDetails details) {
@@ -78,8 +43,8 @@ void main() {
   }
 
   group('BookingScreen', () {
-    test('has correct routeName', () {
-      expect(BookingScreen.routeName, '/booking');
+    test('has correct route constant', () {
+      expect(MovieRoutes.booking, '/booking');
     });
 
     testWidgets('displays app bar with movie title', (tester) async {

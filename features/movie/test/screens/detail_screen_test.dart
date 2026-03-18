@@ -1,30 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:core/core.dart';
+import 'package:feature_movie/feature_movie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:moviecatalogue/ui/booking/booking_screen.dart';
-import 'package:moviecatalogue/ui/detail/detail_screen.dart';
 import 'package:shared/shared.dart';
-
-/*
-
-Yaratilgan testlar:
-
-#	Test	Nima tekshiradi
-1	displays movie title and overview	Film nomi va tavsifi ekranda ko'rinishi
-2	displays Story line, Trailer, and Crew labels	"Story line", "Trailer", "Crew" sarlavhalari
-3	displays Booking Ticket button	"Booking Ticket" tugmasi borligi
-4	displays back and favorite buttons	Orqaga va sevimli ikonkalari
-5	shows crew error message when CrewError	Crew xato holati — xato matni chiqishi
-6	shows trailer error message when TrailerError	Trailer xato holati — xato matni chiqishi
-7	shows crew no data message when CrewNoData	Crew ma'lumot yo'q holati
-8	shows trailer no data message when TrailerNoData	Trailer ma'lumot yo'q holati
-9	shows no internet widget for crew	Crew — internet yo'q, "Reload" tugmasi ko'rinishi
-10	shows no internet widget for trailer	Trailer — internet yo'q, "Reload" tugmasi ko'rinishi
-11	shows crew character names when CrewHasData	Crew ma'lumot bor bo'lsa, aktyor ismi ko'rinishi
-
-*/
 
 class MockTrailerBloc extends MockBloc<TrailerEvent, TrailerState>
     implements TrailerBloc {}
@@ -43,7 +23,7 @@ void main() {
   late MockTrailerBloc mockTrailerBloc;
   late MockCrewBloc mockCrewBloc;
 
-  final _tMovieDto = Movies(
+  final tMovieDto = Movies(
     1,
     'Test Movie Title',
     'This is a test overview for the movie.',
@@ -57,7 +37,7 @@ void main() {
     '',
   );
 
-  final tMovie = _tMovieDto.toUI(true);
+  final tMovie = tMovieDto.toUI(true);
   final tArguments = ScreenArguments(tMovie, true, false);
 
   final tCrew = Crew('Sam Rockwell', 'The Hero', '/profile.jpg');
@@ -91,7 +71,7 @@ void main() {
         ],
         child: MaterialApp(
           routes: {
-            BookingScreen.routeName: (context) =>
+            MovieRoutes.booking: (context) =>
                 const Scaffold(body: Text('Booking')),
           },
           home: DetailScreen(arguments: tArguments),
@@ -99,8 +79,6 @@ void main() {
       ),
     );
 
-    // CustomButton has an AnimationController so pumpAndSettle won't work;
-    // pump enough frames for the widget tree to build.
     await tester.pump(const Duration(seconds: 1));
     await tester.pump(const Duration(seconds: 2));
   }
