@@ -1,11 +1,11 @@
 import 'package:equatable/equatable.dart';
 
-class CrewUI extends Equatable {
+class Crew extends Equatable {
   final String name;
   final String character;
   final String profileUrl;
 
-  const CrewUI({
+  const Crew({
     required this.name,
     required this.character,
     required this.profileUrl,

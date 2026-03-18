@@ -1,5 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:core/core.dart';
+import 'package:core/core.dart' as core;
 import 'package:feature_detail/feature_detail.dart';
 import 'package:feature_movie/feature_movie.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +25,7 @@ void main() {
   late MockTrailerBloc mockTrailerBloc;
   late MockCrewBloc mockCrewBloc;
 
-  final tMovieDto = Movies(
+  final tMovieDto = core.Movies(
     1,
     'Test Movie Title',
     'This is a test overview for the movie.',
@@ -39,11 +39,11 @@ void main() {
     '',
   );
 
-  final tMovie = tMovieDto.toUI(true);
+  final tMovie = tMovieDto.toEntity(true);
   final tArguments = ScreenArguments(tMovie, true, false);
 
-  final tCrew = Crew('Sam Rockwell', 'The Hero', '/profile.jpg');
-  final tResultCrew = ResultCrew([tCrew]);
+  final tCrew = core.Crew('Sam Rockwell', 'The Hero', '/profile.jpg');
+  final tResultCrew = core.ResultCrew([tCrew]);
 
   setUpAll(() {
     registerFallbackValue(FakeTrailerEvent());

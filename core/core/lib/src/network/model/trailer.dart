@@ -1,6 +1,6 @@
+import 'package:domain/domain.dart' as domain;
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:common/common.dart';
 
 part 'trailer.g.dart';
 
@@ -41,12 +41,13 @@ class Trailer extends Equatable {
 
   Map<String, dynamic> toJson() => _$TrailerToJson(this);
 
-  TrailerUI toUI() {
-    return TrailerUI(
+  domain.Trailer toEntity() {
+    final youtubeUrl = 'https://www.youtube.com/watch?v=$youtubeId';
+    return domain.Trailer(
       id: trailerId,
       title: title,
       youtubeId: youtubeId,
-      youtubeUrl: 'https://www.youtube.com/watch?v=$youtubeId',
+      youtubeUrl: youtubeUrl,
     );
   }
 }

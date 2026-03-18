@@ -1,12 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:common/common.dart';
 
 class CardDiscover extends StatelessWidget {
   final String? image, title;
   final double? rating;
-  final List<int>? genre;
+  final List<String>? genres;
   final VoidCallback? onTap;
 
   const CardDiscover({
@@ -14,7 +13,7 @@ class CardDiscover extends StatelessWidget {
     this.image,
     this.title,
     this.rating,
-    this.genre,
+    this.genres,
     this.onTap,
   });
 
@@ -51,7 +50,7 @@ class CardDiscover extends StatelessWidget {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: (genre ?? []).take(3).map(_buildGenreChip).toList(),
+            children: (genres ?? []).take(3).map(_buildGenreChip).toList(),
           ),
         ),
         SizedBox(height: Sizes.height(context) * .01),
@@ -68,12 +67,12 @@ class CardDiscover extends StatelessWidget {
     );
   }
 
-  Widget _buildGenreChip(int id) {
+  Widget _buildGenreChip(String label) {
     return Container(
       margin: EdgeInsets.only(right: 10),
       padding: EdgeInsets.all(8),
       child: Text(
-        Genres.genres[id] ?? '',
+        label,
         style: TextStyle(fontSize: 12, color: ColorPalettes.white),
       ),
       decoration: BoxDecoration(

@@ -1,6 +1,6 @@
+import 'package:domain/domain.dart' as domain;
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:common/common.dart';
 
 part 'crew.g.dart';
 
@@ -40,11 +40,12 @@ class Crew extends Equatable {
 
   Map<String, dynamic> toJson() => _$CrewToJson(this);
 
-  CrewUI toUI() {
-    return CrewUI(
+  domain.Crew toEntity() {
+    const imageBase = 'https://image.tmdb.org/t/p/original';
+    return domain.Crew(
       name: realName,
       character: characterName,
-      profileUrl: profile.isNotEmpty ? profile.imageOriginal : '',
+      profileUrl: profile.isNotEmpty ? '$imageBase$profile' : '',
     );
   }
 }

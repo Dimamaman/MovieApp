@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:core/core.dart';
-import 'package:common/common.dart';
+import 'package:domain/domain.dart';
 
 class LocalRepository {
   final SharedPrefHelper prefHelper;

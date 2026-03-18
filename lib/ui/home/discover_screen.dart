@@ -39,7 +39,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 final dto = state.result.results[index];
-                final movie = dto.toUI(true);
+                final movie = dto.toEntity(true);
                 var position = index + 1;
                 return Container(
                   width: Sizes.width(context),
@@ -78,7 +78,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           image: dto.posterPath,
                           title: movie.name,
                           rating: movie.rating,
-                          genre: movie.genreIds,
+                          genres: movie.genres,
                           onTap: () {
                             Navigation.intentWithData(
                               context,

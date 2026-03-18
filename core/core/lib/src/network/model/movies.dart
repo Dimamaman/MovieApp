@@ -1,7 +1,7 @@
 import 'package:core/src/network/model/genres.dart';
+import 'package:domain/domain.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:common/common.dart';
 
 part 'movies.g.dart';
 
@@ -88,7 +88,7 @@ class Movies extends Equatable {
 
   Map<String, dynamic> toJson() => _$MoviesToJson(this);
 
-  MoviesUI toUI(bool isMovie) {
+  Movie toEntity(bool isMovie) {
     final name = isMovie ? title : tvName;
     final date = isMovie ? releaseDate : tvRelease;
     final year = date.length >= 4 ? date.substring(0, 4) : '-';
@@ -96,8 +96,9 @@ class Movies extends Equatable {
         .map((id) => Genres.genres[id] ?? '')
         .where((g) => g.isNotEmpty)
         .toList();
+    const imageBase = 'https://image.tmdb.org/t/p/original';
 
-    return MoviesUI(
+    return Movie(
       id: id,
       name: name,
       overview: overview,
@@ -109,8 +110,8 @@ class Movies extends Equatable {
       rating: voteAverage,
       ratingText: voteAverage.toStringAsFixed(1),
       ratingPercent: '${(voteAverage * 10).toInt()}%',
-      posterUrl: posterPath.imageOriginal,
-      backdropUrl: backdropPath.imageOriginal,
+      posterUrl: '$imageBase$posterPath',
+      backdropUrl: '$imageBase$backdropPath',
       isMovie: isMovie,
     );
   }

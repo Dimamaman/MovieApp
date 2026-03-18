@@ -59,7 +59,7 @@ class _DetailScreenState extends State<DetailScreen> {
                   imageBanner: widget.arguments.movies.backdropUrl,
                   imagePoster: widget.arguments.movies.posterUrl,
                   rating: widget.arguments.movies.rating,
-                  genre: widget.arguments.movies.genreIds
+                  genre: widget.arguments.movies.genres
                       .take(3)
                       .map(buildGenreChip)
                       .toList(),

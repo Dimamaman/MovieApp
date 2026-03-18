@@ -13,8 +13,8 @@ dependencies:
 
   dependencies:
     path: ../../libraries/dependencies
-  core:
-    path: ../../core/core
+  domain:
+    path: ../../domain/domain
 
 dev_dependencies:
   flutter_test:

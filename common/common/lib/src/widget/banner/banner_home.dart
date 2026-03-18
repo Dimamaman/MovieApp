@@ -1,12 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:common/common.dart';
 
 class BannerHome extends StatelessWidget {
   final Function(int index, CarouselPageChangedReason reason) onPageChanged;
-  final Result data;
+  final List<Movie> items;
   final int currentIndex;
   final String routeNameDetail, routeNameAll;
   final bool isFromMovie;
@@ -14,7 +13,7 @@ class BannerHome extends StatelessWidget {
   const BannerHome({
     Key? key,
     required this.onPageChanged,
-    required this.data,
+    required this.items,
     required this.currentIndex,
     required this.routeNameDetail,
     required this.routeNameAll,
@@ -23,7 +22,7 @@ class BannerHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var result = data.results.length > 10 ? 10 : data.results.length;
+    final result = items.length > 10 ? 10 : items.length;
     return Column(
       children: <Widget>[
         // Banner
@@ -43,8 +42,7 @@ class BannerHome extends StatelessWidget {
               for (var i = 0; i < result; i++)
                 Builder(
                   builder: (context) {
-                    final dto = data.results[i];
-                    final movie = dto.toUI(isFromMovie);
+                    final movie = items[i];
                     return ClipRRect(
                       borderRadius: BorderRadius.circular(Sizes.dp10(context)),
                       child: GestureDetector(
@@ -57,7 +55,7 @@ class BannerHome extends StatelessWidget {
                         },
                         child: GridTile(
                           child: CachedNetworkImage(
-                            imageUrl: dto.backdropPath.imageOriginal,
+                            imageUrl: movie.backdropUrl,
                             width: Sizes.width(context),
                             fit: BoxFit.fill,
                             placeholder: (context, url) => LoadingIndicator(),

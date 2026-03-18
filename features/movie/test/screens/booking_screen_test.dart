@@ -5,11 +5,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:common/common.dart';
 
 void main() {
-  late MoviesUI tMovieUI;
+  late Movie tMovie;
   late ScreenArguments tArguments;
 
   setUp(() {
-    final tMovie = Movies(
+    final tMovieDto = Movies(
       1,
       'Test Booking Movie',
       'Overview',
@@ -23,8 +23,8 @@ void main() {
       '',
     );
 
-    tMovieUI = tMovie.toUI(true);
-    tArguments = ScreenArguments(tMovieUI, true, false);
+    tMovie = tMovieDto.toEntity(true);
+    tArguments = ScreenArguments(tMovie, true, false);
   });
 
   Future<void> pumpBookingScreen(WidgetTester tester) async {

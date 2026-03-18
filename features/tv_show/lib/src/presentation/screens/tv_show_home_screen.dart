@@ -91,6 +91,10 @@ class _TvShowScreenState extends State<TvShowScreen> {
         if (state is TvOnTheAirHasData) {
           _refreshCompleter.complete();
           _refreshCompleter = Completer();
+          final items = state.result.results
+              .take(10)
+              .map((e) => e.toEntity(false))
+              .toList();
           return BannerHome(
             isFromMovie: false,
             onPageChanged: (index, reason) {
@@ -98,7 +102,7 @@ class _TvShowScreenState extends State<TvShowScreen> {
                 _current = index;
               });
             },
-            data: state.result,
+            items: items,
             currentIndex: _current,
             routeNameDetail: MovieRoutes.detail,
             routeNameAll: TvShowRoutes.onTheAir,
@@ -169,7 +173,7 @@ class _TvShowScreenState extends State<TvShowScreen> {
                       : state.result.results.length,
                   itemBuilder: (BuildContext context, int index) {
                     final dto = state.result.results[index];
-                    final movie = dto.toUI(false);
+                    final movie = dto.toEntity(false);
                     return CardHome(
                       image: dto.posterPath,
                       title: movie.name,
@@ -253,7 +257,7 @@ class _TvShowScreenState extends State<TvShowScreen> {
                       : state.result.results.length,
                   itemBuilder: (BuildContext context, int index) {
                     final dto = state.result.results[index];
-                    final movie = dto.toUI(false);
+                    final movie = dto.toEntity(false);
                     return CardHome(
                       image: dto.posterPath,
                       title: movie.name,

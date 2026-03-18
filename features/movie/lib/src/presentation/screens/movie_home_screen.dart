@@ -86,12 +86,16 @@ class _MovieScreenState extends State<MovieScreen> {
         if (state is MovieNowPlayingHasData) {
           _refreshCompleter.complete();
           _refreshCompleter = Completer();
+          final items = state.result.results
+              .take(10)
+              .map((e) => e.toEntity(true))
+              .toList();
           return BannerHome(
             isFromMovie: true,
             onPageChanged: (index, reason) {
               setState(() => _current = index);
             },
-            data: state.result,
+            items: items,
             currentIndex: _current,
             routeNameDetail: MovieRoutes.detail,
             routeNameAll: MovieRoutes.nowPlaying,
@@ -159,7 +163,7 @@ class _MovieScreenState extends State<MovieScreen> {
                       : state.result.results.length,
                   itemBuilder: (BuildContext context, int index) {
                     final dto = state.result.results[index];
-                    final movie = dto.toUI(true);
+                    final movie = dto.toEntity(true);
                     return CardHome(
                       image: dto.posterPath,
                       title: movie.name,
@@ -240,7 +244,7 @@ class _MovieScreenState extends State<MovieScreen> {
                       : state.result.results.length,
                   itemBuilder: (BuildContext context, int index) {
                     final dto = state.result.results[index];
-                    final movie = dto.toUI(true);
+                    final movie = dto.toEntity(true);
                     return CardHome(
                       image: dto.posterPath,
                       title: movie.name,

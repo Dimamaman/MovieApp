@@ -9,9 +9,10 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # This is our modular
   core:
     path: core/core
+  domain:
+    path: domain/domain
   dependencies:
     path: libraries/dependencies
   common:

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class MoviesUI extends Equatable {
+class Movie extends Equatable {
   final int id;
   final String name;
   final String overview;
@@ -16,7 +16,7 @@ class MoviesUI extends Equatable {
   final String backdropUrl;
   final bool isMovie;
 
-  const MoviesUI({
+  const Movie({
     required this.id,
     required this.name,
     required this.overview,

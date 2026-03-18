@@ -49,14 +49,14 @@ class _UpComingScreenState extends State<UpComingScreen> {
                 itemCount: state.result.results.length,
                 itemBuilder: (BuildContext context, int index) {
                   final dto = state.result.results[index];
-                  final movie = dto.toUI(true);
+                  final movie = dto.toEntity(true);
                   return CardMovies(
                     image: dto.posterPath,
                     title: movie.name,
                     vote: movie.ratingText,
                     releaseDate: movie.releaseDate,
                     overview: movie.overview,
-                    genre: movie.genreIds.take(3).map(buildGenreChip).toList(),
+                    genre: movie.genres.take(3).map(buildGenreChip).toList(),
                     onTap: () {
                       Navigation.intentWithData(
                         context,
